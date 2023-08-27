@@ -1,0 +1,10 @@
+{
+  "home": {
+    "title": "Home page",
+    "text": "This is the home page"
+  },
+  "hello": {
+    "title": "Hello page",
+    "text": "Let's build a Next.js app with i18n"
+  }
+}
