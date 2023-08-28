@@ -1,8 +1,8 @@
 import { i18n } from '@/i18n-config';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import LocaleSwitcher from '../../components/locale-switcher';
 import '../globals.css';
-import LocaleSwitcher from './components/locale-switcher';
 
 const inter = Inter({ subsets: ['latin'] });
 
