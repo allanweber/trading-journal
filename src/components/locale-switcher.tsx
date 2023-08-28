@@ -2,6 +2,8 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import English from './English';
+import Portuguese from './Portuguese';
 import { Toggle } from './ui/toggle';
 
 export default function LocaleSwitcher() {
@@ -24,21 +26,19 @@ export default function LocaleSwitcher() {
   return (
     <>
       <Toggle
-        variant="outline"
         pressed={currentLocale === 'en'}
         onPressedChange={(pressed) => handleLocaleChange('en')}
         size="sm"
       >
-        En
+        <English width="32" />
       </Toggle>
       <Toggle
-        variant="outline"
         pressed={currentLocale === 'pt'}
         onPressedChange={(pressed) => handleLocaleChange('pt')}
         size="sm"
-        className="ml-2"
+        className="ml-1"
       >
-        Pt
+        <Portuguese width="32" />
       </Toggle>
     </>
   );
