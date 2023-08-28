@@ -6,14 +6,17 @@ import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 
 function getLocale(request: NextRequest): string | undefined {
-  // Negotiator expects plain object so we need to transform headers
+  if (request.cookies.has('NEXT_LOCALE')) {
+    console.log('cookie', request.cookies.get('NEXT_LOCALE')?.value);
+    return request.cookies.get('NEXT_LOCALE')?.value;
+  }
+
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
   // @ts-ignore locales are readonly
   const locales: string[] = i18n.locales;
 
-  // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
     locales
   );
