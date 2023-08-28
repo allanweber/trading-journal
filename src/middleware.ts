@@ -6,11 +6,6 @@ import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 
 function getLocale(request: NextRequest): string | undefined {
-  if (request.cookies.has('NEXT_LOCALE')) {
-    console.log('cookie', request.cookies.get('NEXT_LOCALE')?.value);
-    return request.cookies.get('NEXT_LOCALE')?.value;
-  }
-
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 

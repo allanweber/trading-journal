@@ -10,7 +10,7 @@ export default async function Home({
   const dict = await getDictionary(lang);
   return (
     <>
-      <Link href="/hello">Hello</Link>
+      <Link href={`/${lang}/hello`}>Hello</Link>
       <h2>{dict.home.title}</h2>
       <p>{dict.home.text}</p>
     </>
