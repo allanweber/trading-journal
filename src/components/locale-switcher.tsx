@@ -1,20 +1,14 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import English from './English';
 import Portuguese from './Portuguese';
 import { Toggle } from './ui/toggle';
 
 export default function LocaleSwitcher() {
   const router = useRouter();
-  const [currentLocale, setCurrentLocale] = useState<String>();
   const pathName = usePathname();
-
-  useEffect(() => {
-    const segments = pathName.split('/');
-    setCurrentLocale(segments[1]);
-  }, [pathName]);
+  const currentLocale = pathName.split('/')[1];
 
   const handleLocaleChange = (locale: string) => {
     if (!pathName) router.push('/');
@@ -30,7 +24,7 @@ export default function LocaleSwitcher() {
         onPressedChange={(pressed) => handleLocaleChange('en')}
         size="sm"
       >
-        <English width="32" />
+        <English width="32" height="32" />
       </Toggle>
       <Toggle
         pressed={currentLocale === 'pt'}
@@ -38,7 +32,7 @@ export default function LocaleSwitcher() {
         size="sm"
         className="ml-1"
       >
-        <Portuguese width="32" />
+        <Portuguese width="32" height="32" />
       </Toggle>
     </>
   );
