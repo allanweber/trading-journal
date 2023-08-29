@@ -1,7 +1,7 @@
 import { i18n } from '@/i18n-config';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import LocaleSwitcher from '../../components/locale-switcher';
+import { ReactNode } from 'react';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -19,20 +19,12 @@ export default function RootLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: { lang: string };
 }) {
   return (
     <html lang={params.lang}>
-      <body className={inter.className}>
-        <LocaleSwitcher />
-        <br />
-        <p>Current locale: {params.lang}</p>
-        <br />
-        <br />
-        <br />
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
