@@ -1,10 +1,12 @@
 {
-  "home": {
-    "title": "Pagina inicial",
-    "text": "Bem vindo a pagina inicial"
+  "nav": {
+    "dashboard": "Painel",
+    "entries": "Entradas"
   },
-  "hello": {
-    "title": "Ola pagina",
-    "text": "Vamos criar uma aplicacao Next.js com i18n"
+  "dashboard": {
+    "title": "Painel e Gráficos"
+  },
+  "entries": {
+    "title": "Entradas"
   }
 }

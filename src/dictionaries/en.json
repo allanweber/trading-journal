@@ -1,10 +1,12 @@
 {
-  "home": {
-    "title": "Home page",
-    "text": "This is the home page"
+  "nav": {
+    "dashboard": "Dashboard",
+    "entries": "Entries"
   },
-  "hello": {
-    "title": "Hello page",
-    "text": "Let's build a Next.js app with i18n"
+  "dashboard": {
+    "title": "Dashboard and Charts"
+  },
+  "entries": {
+    "title": "Entries"
   }
 }
