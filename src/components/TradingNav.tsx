@@ -1,20 +1,16 @@
-import { getDictionary } from '@/dictionaries';
-import { Locale } from '@/i18n-config';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-type Props = {
-  lang: Locale;
-};
+export default function TradingNav() {
+  const t = useTranslations('nav');
 
-export default async function TradingNav(props: Props) {
-  const dict = await getDictionary(props.lang);
   return (
     <nav>
       <span>
-        <Link href={`./dashboard`}>{dict.nav.dashboard}</Link>
+        <Link href={`./dashboard`}>{t('dashboard')}</Link>
       </span>
       <span className="ml-2">
-        <Link href={`./entries`}>{dict.nav.entries}</Link>
+        <Link href={`./entries`}>{t('entries')}</Link>
       </span>
     </nav>
   );
