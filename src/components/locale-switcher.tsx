@@ -24,15 +24,14 @@ export default function LocaleSwitcher() {
         onPressedChange={(pressed) => handleLocaleChange('en')}
         size="sm"
       >
-        <English width="32" height="32" />
+        <English width="24" height="24" />
       </Toggle>
       <Toggle
         pressed={currentLocale === 'pt'}
         onPressedChange={(pressed) => handleLocaleChange('pt')}
         size="sm"
-        className="ml-1"
       >
-        <Portuguese width="32" height="32" />
+        <Portuguese width="24" height="24" />
       </Toggle>
     </>
   );
