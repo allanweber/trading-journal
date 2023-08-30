@@ -3,10 +3,24 @@
     "dashboard": "Painel",
     "entries": "Entradas"
   },
+  "user-nav": {
+    "settings": "Configurações",
+    "profile": "Perfil",
+    "logout": "Sair",
+    "title": "Gerencie as configurações e o perfil da sua conta"
+  },
   "dashboard": {
     "title": "Painel e Gráficos"
   },
   "entries": {
     "title": "Entradas"
+  },
+  "user-settings": {
+    "title": "Configurações",
+    "subtitle": "Gerencie suas configurações da Conta"
+  },
+  "user-profile": {
+    "title": "Perfil",
+    "subtitle": "Gerencie seu perfil da Conta"
   }
 }

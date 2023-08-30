@@ -1,4 +1,5 @@
 import TradingNav from '@/components/TradingNav';
+import UserNav from '@/components/UserNav';
 import LocaleSwitcher from '@/components/locale-switcher';
 import { ReactNode } from 'react';
 
@@ -7,9 +8,10 @@ export default function TradingLayout({ children }: { children: ReactNode }) {
     <>
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
-          <TradingNav className="mx-6" />
+          <TradingNav />
           <div className="ml-auto flex items-center space-x-4">
             <LocaleSwitcher />
+            <UserNav />
           </div>
         </div>
       </div>

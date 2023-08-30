@@ -3,10 +3,24 @@
     "dashboard": "Dashboard",
     "entries": "Entries"
   },
+  "user-nav": {
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout",
+    "title": "Manage your account settings and profile"
+  },
   "dashboard": {
     "title": "Dashboard and Charts"
   },
   "entries": {
     "title": "Entries"
+  },
+  "user-settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account settings"
+  },
+  "user-profile": {
+    "title": "Profile",
+    "subtitle": "Manage your profile"
   }
 }
