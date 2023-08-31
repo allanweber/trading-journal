@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -42,7 +43,11 @@ export default function UserNav() {
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuItem>{t('logout')}</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="#" onClick={() => signOut()}>
+            {t('logout')}
+          </Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
