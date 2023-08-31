@@ -22,5 +22,9 @@
   "user-profile": {
     "title": "Perfil",
     "subtitle": "Gerencie seu perfil da Conta"
+  },
+  "locale-select": {
+    "english": "Inglês",
+    "portuguese": "Português"
   }
 }

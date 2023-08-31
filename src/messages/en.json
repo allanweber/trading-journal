@@ -22,5 +22,9 @@
   "user-profile": {
     "title": "Profile",
     "subtitle": "Manage your profile"
+  },
+  "locale-select": {
+    "english": "English",
+    "portuguese": "Portuguese"
   }
 }
