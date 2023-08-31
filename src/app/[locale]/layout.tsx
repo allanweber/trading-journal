@@ -27,6 +27,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <meta name="referrer" content="no-referrer" />
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={inter.className}>{children}</body>
       </NextIntlClientProvider>
