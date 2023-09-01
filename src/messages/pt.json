@@ -26,5 +26,13 @@
   "locale-select": {
     "english": "Inglês",
     "portuguese": "Português"
+  },
+  "signin": {
+    "title": "Use ou crie sua conta",
+    "subtitle": "Informe seu email abaixo para criar ou usar sua conta",
+    "agreement": "Clicando continuar, você concorda com os",
+    "terms": "Termos de Serviço",
+    "and": "e",
+    "privacy": "Política de Privacidade"
   }
 }

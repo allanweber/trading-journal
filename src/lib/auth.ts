@@ -9,4 +9,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET!,
+  // theme: {
+  //   colorScheme: 'light',
+  //   brandColor: '#000000',
+  // },
+  pages: {
+    signIn: '/auth/signin',
+  },
 };

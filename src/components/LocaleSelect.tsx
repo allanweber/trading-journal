@@ -44,7 +44,7 @@ export default function LocaleSelect() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+        <Button variant="ghost" className="h-10 w-10 rounded-full">
           <Avatar className="h-8 w-8 bg-transparent">
             <AvatarFallback className="bg-transparent">
               {currentLocale?.icon}

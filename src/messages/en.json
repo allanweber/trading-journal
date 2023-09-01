@@ -26,5 +26,13 @@
   "locale-select": {
     "english": "English",
     "portuguese": "Portuguese"
+  },
+  "signin": {
+    "title": "Use or Create an Account",
+    "subtitle": "Enter your email below to create your account",
+    "agreement": "By clicking continue, you agree to our",
+    "terms": "Terms of Service",
+    "and": "and",
+    "privacy": "Privacy Policy"
   }
 }
