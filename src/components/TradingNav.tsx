@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next-intl/client';
 import Link from 'next/link';
+import { Icons } from './icons';
 
 const NavItems = [
   {
@@ -25,6 +26,10 @@ export default function TradingNav() {
 
   return (
     <nav className="flex items-center space-x-4 lg:space-x-6 mx-6">
+      <Link href={`/${locale}/trading/dashboard`}>
+        <Icons.logo className="h-8 w-8" />
+      </Link>
+
       {NavItems.map((item) => (
         <Link
           key={item.href}

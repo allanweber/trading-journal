@@ -1,8 +1,11 @@
 import LocaleSelect from '@/components/LocaleSelect';
+import { Icons } from '@/components/icons';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import SigninForm from './SigninForm';
 
 export default function Signin() {
+  //   const providers: any = await getProviders();
   const t = useTranslations('signin');
   return (
     <>
@@ -13,27 +16,12 @@ export default function Signin() {
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-medium">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 h-6 w-6"
-            >
-              <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-            </svg>
+            <Icons.logo className="h-8 w-8 mr-2" />
             Trading Journal
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
-              <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
-              </p>
+              <p className="text-lg">&ldquo;&rdquo;</p>
             </blockquote>
           </div>
         </div>
@@ -45,8 +33,8 @@ export default function Signin() {
               </h1>
               <p className="text-sm text-muted-foreground">{t('subtitle')}</p>
             </div>
-            <p>Form placeholder</p>
-            <p className="px-8 text-center text-sm text-muted-foreground">
+            <SigninForm />
+            <div className="px-8 text-center text-sm text-muted-foreground">
               <p>{t('agreement')}</p>
               <Link
                 href="/terms"
@@ -61,8 +49,7 @@ export default function Signin() {
               >
                 {t('privacy')}
               </Link>
-              .
-            </p>
+            </div>
           </div>
         </div>
       </div>
