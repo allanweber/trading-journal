@@ -61,7 +61,7 @@ export default function SigninForm() {
                 </FormItem>
               )}
             />
-            <Button disabled={isLoading} className="w-full">
+            <Button disabled={true} className="w-full">
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
