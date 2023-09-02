@@ -28,11 +28,14 @@
     "portuguese": "Português"
   },
   "signin": {
-    "title": "Use ou crie sua conta",
+    "title": "Entre ou Crie Sua Conta",
     "subtitle": "Informe seu email abaixo para criar ou usar sua conta",
     "agreement": "Clicando continuar, você concorda com os",
     "terms": "Termos de Serviço",
     "and": "e",
-    "privacy": "Política de Privacidade"
+    "privacy": "Política de Privacidade",
+    "email_invalid": "Endereço de Email inválido",
+    "button": "Entrar com Email",
+    "continue": "ou continue com"
   }
 }

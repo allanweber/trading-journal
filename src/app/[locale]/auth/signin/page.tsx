@@ -1,12 +1,46 @@
 import LocaleSelect from '@/components/LocaleSelect';
 import { Icons } from '@/components/icons';
+import { getProviders } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import SigninForm from './SigninForm';
+import ProviderButton from './components/ProviderButton';
+import SigninForm from './components/SigninForm';
 
-export default function Signin() {
-  //   const providers: any = await getProviders();
+const Title = () => {
   const t = useTranslations('signin');
+  return (
+    <div className="flex flex-col space-y-2 text-center">
+      <h1 className="text-2xl font-semibold tracking-tight">{t('title')}</h1>
+      <p className="text-sm text-muted-foreground">{t('subtitle')}</p>
+    </div>
+  );
+};
+
+const Footer = () => {
+  const t = useTranslations('signin');
+  return (
+    <div className="px-8 text-center text-sm text-muted-foreground">
+      <p>{t('agreement')}</p>
+      <Link
+        href="/terms"
+        className="underline underline-offset-4 hover:text-primary"
+      >
+        {t('terms')}
+      </Link>
+      <span className="mx-1">{t('and')}</span>
+      <Link
+        href="/privacy"
+        className="underline underline-offset-4 hover:text-primary"
+      >
+        {t('privacy')}
+      </Link>
+    </div>
+  );
+};
+
+export default async function Signin() {
+  const providers: any = await getProviders();
+
   return (
     <>
       <div className="h-screen container relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -27,29 +61,12 @@ export default function Signin() {
         </div>
         <div className="p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px]">
-            <div className="flex flex-col space-y-2 text-center">
-              <h1 className="text-2xl font-semibold tracking-tight">
-                {t('title')}
-              </h1>
-              <p className="text-sm text-muted-foreground">{t('subtitle')}</p>
-            </div>
+            <Title />
             <SigninForm />
-            <div className="px-8 text-center text-sm text-muted-foreground">
-              <p>{t('agreement')}</p>
-              <Link
-                href="/terms"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                {t('terms')}
-              </Link>
-              <span className="mx-1">{t('and')}</span>
-              <Link
-                href="/privacy"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                {t('privacy')}
-              </Link>
-            </div>
+            {Object.values(providers).map((provider: any) => (
+              <ProviderButton key={provider.name} provider={provider} />
+            ))}
+            <Footer />
           </div>
         </div>
       </div>
