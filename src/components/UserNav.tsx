@@ -1,3 +1,5 @@
+'use client';
+
 import { AvatarImage } from '@radix-ui/react-avatar';
 import { signOut, useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
