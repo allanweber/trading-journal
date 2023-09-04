@@ -12,15 +12,14 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 const authMiddleware = withAuth(
-  // Note that this callback is only invoked if
-  // the `authorized` callback has returned `true`
-  // and not for pages listed in `pages`.
   function onSuccess(req) {
     return intlMiddleware(req);
   },
   {
     callbacks: {
-      authorized: ({ token }) => token != null,
+      authorized: (params) => {
+        return params.token != null;
+      },
     },
     pages: {
       signIn: '/auth/signin',
