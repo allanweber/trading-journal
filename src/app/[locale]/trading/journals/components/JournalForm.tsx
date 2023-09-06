@@ -2,7 +2,6 @@
 
 import CurrencySelect from '@/components/CurrencySelect';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
 import {
   Form,
   FormControl,
@@ -13,20 +12,14 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { toast } from '@/components/ui/use-toast';
-import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+
+import DatePicker from '@/components/DatePicker';
 
 export default function JournalForm() {
   const t = useTranslations('journal-form');
@@ -85,58 +78,30 @@ export default function JournalForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t('name-label')}</FormLabel>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input placeholder={t('name-placeholder')} {...field} />
               </FormControl>
-              <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
-              </FormDescription>
+              <FormDescription>{t('name-description')}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="startDate"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={'outline'}
-                      className={cn(
-                        'pl-3 text-left font-normal',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, 'PPP')
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date('1900-01-01')
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription>
-                Your date of birth is used to calculate your age.
-              </FormDescription>
+              <FormLabel>{t('start-date-label')}</FormLabel>
+
+              <DatePicker
+                selected={field.value}
+                onSelect={field.onChange}
+                placeholder={t('start-date-placeholder')}
+              />
+
+              <FormDescription>{t('start-date-description')}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -147,14 +112,12 @@ export default function JournalForm() {
           name="currency"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Currency</FormLabel>
+              <FormLabel>{t('currency-label')}</FormLabel>
               <CurrencySelect
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               />
-              <FormDescription>
-                This is the language that will be used in the dashboard.
-              </FormDescription>
+              <FormDescription>{t('currency-description')}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -162,10 +125,10 @@ export default function JournalForm() {
 
         <div className="justify-between space-x-2">
           <Button asChild variant="outline" className="w-[200px]">
-            <Link href="/trading/journals">Cancel</Link>
+            <Link href="/trading/journals">{t('cancel')}</Link>
           </Button>
           <Button type="submit" className="w-[200px]">
-            Save Journal
+            {t('save')}
           </Button>
         </div>
       </form>

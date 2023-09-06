@@ -50,12 +50,24 @@
     "start-date-required": "Data de início é obrigatória",
     "start-balance-required": "Saldo inicial é obrigatório",
     "currency-required": "Moeda é obrigatória",
-    "currency-label": "Moeda"
+    "save": "Salvar Diário",
+    "cancel": "Cancelar",
+    "name-label": "Nome",
+    "name-placeholder": "Informe o nome do diário",
+    "name-description": "O nome do diário",
+    "currency-label": "Moeda",
+    "currency-description": "A seleção determinará a moeda usada para todos os lançamentos neste diário",
+    "start-date-label": "Data de Início",
+    "start-date-placeholder": "Selecione uma data de início",
+    "start-date-description": "Esta é a data em que você começa a negociar neste diário. Esta data será usada para calcular o saldo do seu diário"
   },
   "currency": {
     "USD": "Dólar Americano",
     "EUR": "Euro",
     "BRL": "Real",
     "placeholder": "Selecione uma moeda"
+  },
+  "date-picker": {
+    "placeholder": "Selecione uma data"
   }
 }

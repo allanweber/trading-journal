@@ -50,12 +50,24 @@
     "start-date-required": "Start date is required",
     "start-balance-required": "Start balance must be a number",
     "currency-required": "Currency is required",
-    "currency-label": "Currency"
+    "save": "Save Journal",
+    "cancel": "Cancel",
+    "name-label": "Name",
+    "name-placeholder": "Enter a name for your journal",
+    "name-description": "The name of the journal",
+    "currency-label": "Currency",
+    "currency-description": "The selection will determine the currency used for all entries in this journal",
+    "start-date-label": "Start Date",
+    "start-date-placeholder": "Select a start date for your journal",
+    "start-date-description": "This is the date you start trade in this journal. This date will be used to calculate the balance of your journal"
   },
   "currency": {
     "USD": "US Dollar",
     "EUR": "Euro",
     "BRL": "Brazilian Real",
     "placeholder": "Select a currency"
+  },
+  "date-picker": {
+    "placeholder": "Select a date"
   }
 }
