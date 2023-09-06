@@ -1,7 +1,8 @@
 {
   "nav": {
     "dashboard": "Dashboard",
-    "entries": "Entries"
+    "entries": "Entries",
+    "journals": "Journals"
   },
   "user-nav": {
     "settings": "Settings",
@@ -37,5 +38,24 @@
     "email_invalid": "Invalid email address",
     "button": "Sign In with your Email - Temporary disabled",
     "continue": "or continue with"
+  },
+  "journals": {
+    "title": "Journals",
+    "subtitle": "Manage your journals",
+    "create": "Create a new journal"
+  },
+  "journal-form": {
+    "name-min": "Name must be at least 5 characters long",
+    "name-max": "Name must be at most 30 characters long",
+    "start-date-required": "Start date is required",
+    "start-balance-required": "Start balance must be a number",
+    "currency-required": "Currency is required",
+    "currency-label": "Currency"
+  },
+  "currency": {
+    "USD": "US Dollar",
+    "EUR": "Euro",
+    "BRL": "Brazilian Real",
+    "placeholder": "Select a currency"
   }
 }

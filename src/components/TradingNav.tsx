@@ -12,6 +12,10 @@ const NavItems = [
     href: '/trading/dashboard',
   },
   {
+    key: 'journals',
+    href: '/trading/journals',
+  },
+  {
     key: 'entries',
     href: '/trading/entries',
   },

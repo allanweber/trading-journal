@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider, useLocale } from 'next-intl';
 import { Inter } from 'next/font/google';
@@ -29,7 +30,10 @@ export default async function RootLayout({
     <html lang={locale}>
       <meta name="referrer" content="no-referrer" />
       <NextIntlClientProvider locale={locale} messages={messages}>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <main>{children}</main>
+          <Toaster />
+        </body>
       </NextIntlClientProvider>
     </html>
   );

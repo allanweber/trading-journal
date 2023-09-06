@@ -1,7 +1,8 @@
 {
   "nav": {
     "dashboard": "Painel",
-    "entries": "Entradas"
+    "entries": "Entradas",
+    "journals": "Diários"
   },
   "user-nav": {
     "settings": "Configurações",
@@ -37,5 +38,24 @@
     "email_invalid": "Endereço de Email inválido",
     "button": "Entrar com Email - Temporariamente Desabilitado",
     "continue": "ou continue com"
+  },
+  "journals": {
+    "title": "Diários",
+    "subtitle": "Gerencie seus diários",
+    "create": "Criar novo Diário"
+  },
+  "journal-form": {
+    "name-min": "Nome deve ter pelo menos 5 caracteres",
+    "name-max": "Nome deve ter no máximo 30 caracteres",
+    "start-date-required": "Data de início é obrigatória",
+    "start-balance-required": "Saldo inicial é obrigatório",
+    "currency-required": "Moeda é obrigatória",
+    "currency-label": "Moeda"
+  },
+  "currency": {
+    "USD": "Dólar Americano",
+    "EUR": "Euro",
+    "BRL": "Real",
+    "placeholder": "Selecione uma moeda"
   }
 }
