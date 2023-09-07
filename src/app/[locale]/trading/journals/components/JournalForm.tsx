@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import DatePicker from '@/components/DatePicker';
+import { NumberInput } from '@/components/NumberInput';
 
 export default function JournalForm() {
   const t = useTranslations('journal-form');
@@ -36,9 +37,12 @@ export default function JournalForm() {
     startDate: z.date({
       required_error: t('start-date-required'),
     }),
-    // startBalance: z.number({
-    //   required_error: t('start-balance-required'),
-    // }),
+    startBalance: z
+      .number({
+        required_error: t('start-balance-required'),
+        invalid_type_error: t('start-balance-positive'),
+      })
+      .positive({ message: t('start-balance-positive') }),
     currency: z.string({
       required_error: t('currency-required'),
     }),
@@ -51,6 +55,7 @@ export default function JournalForm() {
     name: 'Journal name',
     startDate: new Date('2023-01-23'),
     currency: 'EUR',
+    startBalance: 123.55,
   };
 
   const form = useForm<JournalValues>({
@@ -102,6 +107,26 @@ export default function JournalForm() {
               />
 
               <FormDescription>{t('start-date-description')}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="startBalance"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>{t('start-balance-label')}</FormLabel>
+
+              <NumberInput
+                placeholder={t('start-balance-placeholder')}
+                {...field}
+              />
+
+              <FormDescription>
+                {t('start-balance-description')}
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

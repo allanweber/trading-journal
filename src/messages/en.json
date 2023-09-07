@@ -59,7 +59,11 @@
     "currency-description": "The selection will determine the currency used for all entries in this journal",
     "start-date-label": "Start Date",
     "start-date-placeholder": "Select a start date for your journal",
-    "start-date-description": "This is the date you start trade in this journal. This date will be used to calculate the balance of your journal"
+    "start-date-description": "This is the date you start trade in this journal. This date will be used to calculate the balance of your journal",
+    "start-balance-label": "Start Balance",
+    "start-balance-placeholder": "Enter the start balance for your journal",
+    "start-balance-description": "This is the balance you have in your account when you start trading in this journal. This balance will be used to calculate the balance of your journal",
+    "start-balance-positive": "Start balance must be greater than 0"
   },
   "currency": {
     "USD": "US Dollar",
