@@ -55,7 +55,7 @@ export default function JournalForm() {
     name: 'Journal name',
     startDate: new Date('2023-01-23'),
     currency: 'EUR',
-    startBalance: 123.55,
+    startBalance: 123.45,
   };
 
   const form = useForm<JournalValues>({
@@ -64,7 +64,6 @@ export default function JournalForm() {
   });
 
   function onSubmit(data: JournalValues) {
-    console.log(data);
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -119,10 +118,7 @@ export default function JournalForm() {
             <FormItem className="flex flex-col">
               <FormLabel>{t('start-balance-label')}</FormLabel>
 
-              <NumberInput
-                placeholder={t('start-balance-placeholder')}
-                {...field}
-              />
+              <NumberInput {...field} />
 
               <FormDescription>
                 {t('start-balance-description')}

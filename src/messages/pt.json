@@ -61,7 +61,6 @@
     "start-date-placeholder": "Selecione uma data de início",
     "start-date-description": "Esta é a data em que você começa a negociar neste diário. Esta data será usada para calcular o saldo do seu diário",
     "start-balance-label": "Saldo Inicial",
-    "start-balance-placeholder": "Insira o saldo inicial do seu diário",
     "start-balance-description": "Este é o saldo que você tem em sua conta quando começa a negociar neste diário. Este saldo será usado para calcular o saldo do seu diário",
     "start-balance-positive": "O saldo inicial deve ser maior que 0"
   },

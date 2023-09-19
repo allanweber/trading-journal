@@ -3,3 +3,9 @@ export const currencies = [
   { value: 'EUR', symbol: '€' },
   { value: 'BRL', symbol: 'R$' },
 ];
+
+export function getSymbol(currencyCode: string) {
+  const currency = currencies.find((c) => c.value === currencyCode);
+  if (currency) return currency.symbol;
+  return null;
+}
