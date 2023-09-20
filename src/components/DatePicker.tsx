@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { enGB, ptBR } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
+import { Separator } from './ui/separator';
 
 type Props = {
   onSelect: (value: Date | undefined) => void;
@@ -25,6 +26,10 @@ export default function DatePicker(props: Props) {
   const t = useTranslations('date-picker');
   const calendarLocale = locale === 'en' ? enGB : ptBR;
 
+  const todayClick = () => {
+    onSelect(new Date());
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -37,7 +42,7 @@ export default function DatePicker(props: Props) {
             )}
           >
             {selected ? (
-              format(selected, 'PPP', { locale: calendarLocale })
+              format(selected, 'PPPpp', { locale: calendarLocale })
             ) : (
               <span>{placeholder ?? t('placeholder')}</span>
             )}
@@ -51,6 +56,14 @@ export default function DatePicker(props: Props) {
           selected={selected}
           onSelect={onSelect}
           locale={calendarLocale}
+          footer={
+            <div>
+              <Separator className="mb-2" />
+              <Button variant="outline" size="sm" onClick={todayClick}>
+                Today
+              </Button>
+            </div>
+          }
           {...rest}
         />
       </PopoverContent>
