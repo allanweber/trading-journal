@@ -71,6 +71,9 @@
     "placeholder": "Select a currency"
   },
   "date-picker": {
-    "placeholder": "Select a date"
+    "placeholder": "Select a date",
+    "today": "Today",
+    "now": "Now",
+    "clear": "Clear"
   }
 }

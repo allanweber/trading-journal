@@ -53,7 +53,7 @@ export default function JournalForm() {
   // Get from API
   const defaultValues: Partial<JournalValues> = {
     name: 'Journal name',
-    startDate: new Date('2023-01-23'),
+    startDate: new Date(2023, 1, 1, 15, 23),
     currency: 'EUR',
     startBalance: 123.45,
   };
@@ -64,6 +64,7 @@ export default function JournalForm() {
   });
 
   function onSubmit(data: JournalValues) {
+    console.log(data);
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -100,7 +101,7 @@ export default function JournalForm() {
               <FormLabel>{t('start-date-label')}</FormLabel>
 
               <DatePicker
-                selected={field.value}
+                value={field.value}
                 onSelect={field.onChange}
                 placeholder={t('start-date-placeholder')}
               />
