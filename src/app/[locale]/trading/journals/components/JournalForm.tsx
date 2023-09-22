@@ -149,11 +149,7 @@ export default function JournalForm() {
           <Button asChild variant="outline" className="w-[200px]">
             <Link href="/trading/journals">{t('cancel')}</Link>
           </Button>
-          <Button
-            type="submit"
-            className="w-[200px]"
-            disabled={!form.formState.isValid}
-          >
+          <Button type="submit" className="w-[200px]">
             {t('save')}
           </Button>
         </div>
