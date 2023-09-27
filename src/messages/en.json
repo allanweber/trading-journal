@@ -42,7 +42,8 @@
   "journals": {
     "title": "Journals",
     "subtitle": "Manage your journals",
-    "create": "Create a new journal"
+    "create": "Create a new journal",
+    "input-filter-placeholder": "Filter by name"
   },
   "journal-form": {
     "name-min": "Name must be at least 5 characters long",
@@ -75,5 +76,24 @@
     "today": "Today",
     "now": "Now",
     "clear": "Clear"
+  },
+  "table-columns": {
+    "toggle-columns": "Toggle columns",
+    "name": "Name",
+    "startDate": "Start Date",
+    "startBalance": "Start Balance",
+    "currency": "Currency"
+  },
+  "pagination": {
+    "rows-count": "{count, plural, =0 {none row} =1 {1 row} other {# rows}} in total.",
+    "rows-per-page": "Rows per page",
+    "page-and-total": "Page {page} of {pages}",
+    "first-page": "Got to first page",
+    "prev-page": "Got to previous page",
+    "next-page": "Got to next page",
+    "last-page": "Got to last page"
+  },
+  "data-table": {
+    "no-results": "No results found"
   }
 }

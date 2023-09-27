@@ -11,8 +11,8 @@ import { enGB, ptBR } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { format } from 'date-fns';
 import { useState } from 'react';
+import DateDisplay from './DateDisplay';
 import { Separator } from './ui/separator';
 
 type Props = {
@@ -22,9 +22,6 @@ type Props = {
   placeholder?: string;
   [x: string]: any;
 };
-
-const withTimeFormat = 'PPP hh:mm b';
-const dateFormat = 'PPP';
 
 export default function DatePicker(props: Props) {
   const { onSelect, value, withTime, placeholder, ...rest } = props;
@@ -37,8 +34,6 @@ export default function DatePicker(props: Props) {
   const [timeValue, setTimeValue] = useState<string>(
     value && withTime ? `${value.getHours()}:${value.getMinutes()}` : '00:00'
   );
-
-  const fieldFormat = withTime ? withTimeFormat : dateFormat;
 
   const todayClick = () => {
     const today = new Date();
@@ -125,7 +120,7 @@ export default function DatePicker(props: Props) {
             )}
           >
             {selected ? (
-              format(selected, fieldFormat, { locale: calendarLocale })
+              <DateDisplay value={selected} withTime={withTime} />
             ) : (
               <span>{placeholder ?? t('placeholder')}</span>
             )}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "650dd78c74f1d574640a8846",
+    "name": "Test Account",
+    "startDate": "2015-01-01T00:00:00.000Z",
+    "startBalance": 2500,
+    "currency": "USD"
+  },
+  {
+    "id": "650dd78c74f1d574640a8847",
+    "name": "Test Account 2",
+    "startDate": "2015-01-02T00:00:00.000Z",
+    "startBalance": 754.21,
+    "currency": "BRL"
+  },
+  {
+    "id": "650dd78c74f1d574640a8848",
+    "name": "Test Account 3",
+    "startDate": "2015-01-03T00:00:00.000Z",
+    "startBalance": 6587,
+    "currency": "EUR"
+  },
+  {
+    "id": "650dd78c74f1d574640a8849",
+    "name": "Test Account 4",
+    "startDate": "2015-02-01T00:00:00.000Z",
+    "startBalance": 12569,
+    "currency": "USD"
+  },
+  {
+    "id": "650dd78c74f1d574640a8850",
+    "name": "Test Account 5",
+    "startDate": "2015-03-01T00:00:00.000Z",
+    "startBalance": 0.1,
+    "currency": "BRL"
+  },
+  {
+    "id": "650dd78c74f1d574640a8851",
+    "name": "Test Account 6",
+    "startDate": "2015-04-01T00:00:00.000Z",
+    "startBalance": 7896.23,
+    "currency": "EUR"
+  },
+  {
+    "id": "650dd78c74f1d574640a8852",
+    "name": "Test Account 7",
+    "startDate": "2015-05-01T00:00:00.000Z",
+    "startBalance": 20000,
+    "currency": "USD"
+  },
+  {
+    "id": "650dd78c74f1d574640a8853",
+    "name": "Test Account 8",
+    "startDate": "2015-06-01T00:00:00.000Z",
+    "startBalance": 150236,
+    "currency": "BRL"
+  },
+  {
+    "id": "650dd78c74f1d574640a8854",
+    "name": "Test Account 9",
+    "startDate": "2015-07-01T00:00:00.000Z",
+    "startBalance": 450,
+    "currency": "EUR"
+  },
+  {
+    "id": "650dd78c74f1d574640a8855",
+    "name": "Test Account 10",
+    "startDate": "2015-08-01T00:00:00.000Z",
+    "startBalance": 99.99,
+    "currency": "USD"
+  },
+  {
+    "id": "650dd78c74f1d574640a8856",
+    "name": "Test Account 11",
+    "startDate": "2015-09-01T00:00:00.000Z",
+    "startBalance": 2002,
+    "currency": "BRL"
+  },
+  {
+    "id": "650dd78c74f1d574640a8857",
+    "name": "Test Account 12",
+    "startDate": "2015-11-01T00:00:00.000Z",
+    "startBalance": 4002,
+    "currency": "EUR"
+  }
+]
