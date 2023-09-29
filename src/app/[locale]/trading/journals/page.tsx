@@ -2,12 +2,9 @@ import { Action, PageHeader, Subtitle, Title } from '@/components/PageHeader';
 import { DataTable } from '@/components/datatable/DataTable';
 import { Button } from '@/components/ui/button';
 import { currencies } from '@/model/currency/currencies';
-import { Journal, journalSchema } from '@/model/journal';
-import { promises as fs } from 'fs';
+import { Journal, getAllJournals } from '@/model/journal';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import path from 'path';
-import { z } from 'zod';
 import { columns } from './components/columns';
 
 function JournalHeader() {
@@ -59,18 +56,8 @@ function JournalTable({ journals }: { journals: Journal[] }) {
   );
 }
 
-async function getJournals() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), '/src/data/journals.json')
-  );
-
-  const tasks = JSON.parse(data.toString());
-
-  return z.array(journalSchema).parse(tasks);
-}
-
 export default async function Journals() {
-  const journals = await getJournals();
+  const journals = await getAllJournals();
   return (
     <>
       <JournalHeader />
