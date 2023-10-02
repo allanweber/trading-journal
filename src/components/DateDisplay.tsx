@@ -6,7 +6,7 @@ const withTimeFormat = 'PPP hh:mm b';
 const dateFormat = 'PPP';
 
 type Props = {
-  value: Date | string;
+  value: Date | string | undefined;
   withTime?: boolean;
 };
 
@@ -15,6 +15,9 @@ export default function DateDisplay(props: Props) {
   const locale = useLocale();
   const calendarLocale = locale === 'en' ? enGB : ptBR;
   const fieldFormat = withTime ? withTimeFormat : dateFormat;
+
+  if (!value) return null;
+
   let date;
   if (typeof value === 'string') {
     date = new Date(value);

@@ -14,7 +14,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import * as React from 'react';
 
 import { useTranslations } from 'next-intl';
 import {
@@ -28,28 +27,41 @@ import {
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableToolbar, ToolbarOptions } from './DataTableToolbar';
 
+import { useMemo, useState } from 'react';
+import { Skeleton } from '../ui/skeleton';
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: TData[] | undefined;
   toolbarOptions?: ToolbarOptions;
+  isLoading?: boolean;
 }
 
 export function DataTable<TData extends { id: string }, TValue>({
   columns,
   data,
   toolbarOptions,
+  isLoading,
 }: DataTableProps<TData, TValue>) {
   const t = useTranslations('data-table');
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+  const [rowSelection, setRowSelection] = useState({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  const tableColumns = useMemo(
+    () =>
+      isLoading
+        ? columns.map((column) => ({
+            ...column,
+            Cell: <span>loading</span>, //<Skeleton />,
+          }))
+        : columns,
+    [isLoading, columns]
   );
-  const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
-    data,
+    data: data || [],
     columns,
     state: {
       sorting,
@@ -73,7 +85,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 
   return (
     <div className="space-y-4">
-      {toolbarOptions && (
+      {toolbarOptions && data && (
         <DataTableToolbar table={table} options={toolbarOptions} />
       )}
       <div className="rounded-md border">
@@ -97,7 +109,20 @@ export function DataTable<TData extends { id: string }, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-1/2" />
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-full" />
+                  </div>
+                </TableCell>
+              </TableRow>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -126,7 +151,7 @@ export function DataTable<TData extends { id: string }, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {data && <DataTablePagination table={table} />}
     </div>
   );
 }
