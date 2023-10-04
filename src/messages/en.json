@@ -43,11 +43,15 @@
     "title": "Journals",
     "subtitle": "Manage your journals",
     "create": "Create a new journal",
-    "input-filter-placeholder": "Filter by name"
+    "input-filter-placeholder": "Filter by name",
+    "new-journal": "New Journal",
+    "new-journal-description": "Create a new journal to start trading",
+    "edit-journal": "Edit Journal"
   },
   "journal-form": {
     "name-min": "Name must be at least 5 characters long",
     "name-max": "Name must be at most 30 characters long",
+    "name-required": "Name is required",
     "start-date-required": "Start date is required",
     "start-balance-required": "Start balance must be a number",
     "currency-required": "Currency is required",

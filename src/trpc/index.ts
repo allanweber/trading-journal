@@ -1,11 +1,16 @@
-import { getAllJournals } from '@/model/journal';
+import { getJournal, getJournals } from '@/model/journal';
+import { z } from 'zod';
 import { privateProcedure, router } from './trpc';
 
 export const appRouter = router({
   journals: privateProcedure.query(async ({ ctx }) => {
     const { userEmail } = ctx;
-    const journals = await getAllJournals(userEmail);
+    const journals = await getJournals(userEmail);
     return journals;
+  }),
+  journal: privateProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    const { userEmail } = ctx;
+    return await getJournal(userEmail, input);
   }),
 });
 

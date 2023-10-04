@@ -43,11 +43,15 @@
     "title": "Diários",
     "subtitle": "Gerencie seus diários",
     "create": "Criar novo Diário",
-    "input-filter-placeholder": "Filtrar por nome"
+    "input-filter-placeholder": "Filtrar por nome",
+    "new-journal": "Novo Diário",
+    "new-journal-description": "Crie um novo diário para começar a negociar",
+    "edit-journal": "Editar Diário"
   },
   "journal-form": {
     "name-min": "Nome deve ter pelo menos 5 caracteres",
     "name-max": "Nome deve ter no máximo 30 caracteres",
+    "name-required": "Nome é obrigatório",
     "start-date-required": "Data de início é obrigatória",
     "start-balance-required": "Saldo inicial é obrigatório",
     "currency-required": "Moeda é obrigatória",

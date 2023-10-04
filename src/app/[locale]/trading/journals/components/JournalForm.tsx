@@ -9,7 +9,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
@@ -19,48 +18,51 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
+import { ErrorDisplay } from '@/components/ErrorDisplay';
+import { InputMessage } from '@/components/InputMessage';
 import { NumberInput } from '@/components/NumberInput';
+import { Journal } from '@/model/journal';
 
-export default function JournalForm() {
+export default function JournalForm({ initial }: { initial?: Journal }) {
   const t = useTranslations('journal-form');
 
   const journalSchema = z.object({
     name: z
-      .string()
+      .string({
+        required_error: 'name-required',
+      })
       .min(5, {
-        message: t('name-min'),
+        message: 'name-min',
       })
       .max(30, {
-        message: t('name-max'),
+        message: 'name-max',
       }),
     startDate: z.date({
-      required_error: t('start-date-required'),
+      required_error: 'start-date-required',
     }),
     startBalance: z
       .number({
-        required_error: t('start-balance-required'),
-        invalid_type_error: t('start-balance-positive'),
+        required_error: 'start-balance-required',
+        invalid_type_error: 'start-balance-positive',
       })
-      .positive({ message: t('start-balance-positive') }),
+      .positive({ message: 'start-balance-positive' }),
     currency: z.string({
-      required_error: t('currency-required'),
+      required_error: 'currency-required',
     }),
   });
 
   type JournalValues = z.infer<typeof journalSchema>;
 
+  const { data: journal, error } = trpc.journal.useQuery('params.journalId');
+
   // Get from API
-  const defaultValues: Partial<JournalValues> = {
-    name: 'Journal name',
-    startDate: new Date(2023, 1, 1, 15, 23),
-    currency: 'EUR',
-    startBalance: 123.45,
-  };
+  const defaultValues: Partial<JournalValues> = {};
 
   const form = useForm<JournalValues>({
     resolver: zodResolver(journalSchema),
-    defaultValues,
+    defaultValues: defaultValues,
   });
 
   function onSubmit(data: JournalValues) {
@@ -76,84 +78,89 @@ export default function JournalForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('name-label')}</FormLabel>
-              <FormControl>
-                <Input placeholder={t('name-placeholder')} {...field} />
-              </FormControl>
-              <FormDescription>{t('name-description')}</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <>
+      <ErrorDisplay error={error} />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('name-label')}</FormLabel>
+                <FormControl>
+                  <Input placeholder={t('name-placeholder')} {...field} />
+                </FormControl>
+                <FormDescription>{t('name-description')}</FormDescription>
+                <InputMessage form={form} field="name" translations={t} />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="startDate"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>{t('start-date-label')}</FormLabel>
+          <FormField
+            control={form.control}
+            name="startDate"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>{t('start-date-label')}</FormLabel>
 
-              <DatePicker
-                value={field.value}
-                onSelect={field.onChange}
-                placeholder={t('start-date-placeholder')}
-              />
+                <DatePicker
+                  value={field.value}
+                  onSelect={field.onChange}
+                  placeholder={t('start-date-placeholder')}
+                />
+                <InputMessage form={form} field="startDate" translations={t} />
+              </FormItem>
+            )}
+          />
 
-              <FormDescription>{t('start-date-description')}</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="startBalance"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>{t('start-balance-label')}</FormLabel>
 
-        <FormField
-          control={form.control}
-          name="startBalance"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>{t('start-balance-label')}</FormLabel>
+                <NumberInput {...field} />
 
-              <NumberInput {...field} />
+                <FormDescription>
+                  {t('start-balance-description')}
+                </FormDescription>
+                <InputMessage
+                  form={form}
+                  field="startBalance"
+                  translations={t}
+                />
+              </FormItem>
+            )}
+          />
 
-              <FormDescription>
-                {t('start-balance-description')}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="currency"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>{t('currency-label')}</FormLabel>
+                <CurrencySelect
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                />
+                <FormDescription>{t('currency-description')}</FormDescription>
+                <InputMessage form={form} field="currency" translations={t} />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="currency"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>{t('currency-label')}</FormLabel>
-              <CurrencySelect
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              />
-              <FormDescription>{t('currency-description')}</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="justify-between space-x-2">
-          <Button asChild variant="outline" className="w-[200px]">
-            <Link href="/trading/journals">{t('cancel')}</Link>
-          </Button>
-          <Button type="submit" className="w-[200px]">
-            {t('save')}
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <div className="justify-between space-x-2">
+            <Button asChild variant="outline" className="w-[200px]">
+              <Link href="/trading/journals">{t('cancel')}</Link>
+            </Button>
+            <Button type="submit" className="w-[200px]">
+              {t('save')}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </>
   );
 }

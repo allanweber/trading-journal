@@ -27,7 +27,7 @@ import {
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableToolbar, ToolbarOptions } from './DataTableToolbar';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
 interface DataTableProps<TData, TValue> {
@@ -48,17 +48,6 @@ export function DataTable<TData extends { id: string }, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
-
-  const tableColumns = useMemo(
-    () =>
-      isLoading
-        ? columns.map((column) => ({
-            ...column,
-            Cell: <span>loading</span>, //<Skeleton />,
-          }))
-        : columns,
-    [isLoading, columns]
-  );
 
   const table = useReactTable({
     data: data || [],

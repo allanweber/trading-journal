@@ -15,7 +15,7 @@ export default function Journals() {
         </Title>
         <Action>
           <Button asChild>
-            <Link href="./new">{t('create')}</Link>
+            <Link href="/trading/journals/new">{t('create')}</Link>
           </Button>
         </Action>
       </PageHeader>
