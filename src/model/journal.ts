@@ -1,44 +1,29 @@
-import mongoClient from '@/lib/mongodb';
-import { getDbName } from '@/lib/utils';
-import { TRPCClientError } from '@trpc/client';
 import { z } from 'zod';
 
 export const journalSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  startDate: z.date(),
-  startBalance: z.number(),
-  currency: z.string(),
+  id: z.string().optional(),
+  name: z
+    .string({
+      required_error: 'name-required',
+    })
+    .min(5, {
+      message: 'name-min',
+    })
+    .max(30, {
+      message: 'name-max',
+    }),
+  startDate: z.date({
+    required_error: 'start-date-required',
+  }),
+  startBalance: z
+    .number({
+      required_error: 'start-balance-required',
+      invalid_type_error: 'start-balance-positive',
+    })
+    .positive({ message: 'start-balance-positive' }),
+  currency: z.string({
+    required_error: 'currency-required',
+  }),
 });
 
 export type Journal = z.infer<typeof journalSchema>;
-
-export async function getJournals(userEmail: string): Promise<Journal[]> {
-  const client = await mongoClient;
-  const dbName = getDbName(userEmail);
-  const journals = await client
-    .db(dbName)
-    .collection('journals')
-    .find<Journal>({})
-    .toArray();
-
-  return journals;
-}
-
-export async function getJournal(
-  userEmail: string,
-  journalId: string
-): Promise<Journal> {
-  const client = await mongoClient;
-  const dbName = getDbName(userEmail);
-  const journal = await client
-    .db(dbName)
-    .collection('journals')
-    .findOne<Journal>({ id: journalId });
-
-  if (!journal) {
-    throw new TRPCClientError(`Journal ${journalId} not found`);
-  }
-
-  return journal;
-}

@@ -16,56 +16,29 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
 import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { InputMessage } from '@/components/InputMessage';
 import { NumberInput } from '@/components/NumberInput';
-import { Journal } from '@/model/journal';
+import { Journal, journalSchema } from '@/model/journal';
 
 export default function JournalForm({ initial }: { initial?: Journal }) {
   const t = useTranslations('journal-form');
-
-  const journalSchema = z.object({
-    name: z
-      .string({
-        required_error: 'name-required',
-      })
-      .min(5, {
-        message: 'name-min',
-      })
-      .max(30, {
-        message: 'name-max',
-      }),
-    startDate: z.date({
-      required_error: 'start-date-required',
-    }),
-    startBalance: z
-      .number({
-        required_error: 'start-balance-required',
-        invalid_type_error: 'start-balance-positive',
-      })
-      .positive({ message: 'start-balance-positive' }),
-    currency: z.string({
-      required_error: 'currency-required',
-    }),
-  });
-
-  type JournalValues = z.infer<typeof journalSchema>;
-
   const { data: journal, error } = trpc.journal.useQuery('params.journalId');
 
   // Get from API
-  const defaultValues: Partial<JournalValues> = {};
+  const defaultValues: Partial<Journal> = {
+    id: '',
+  };
 
-  const form = useForm<JournalValues>({
+  const form = useForm<Journal>({
     resolver: zodResolver(journalSchema),
     defaultValues: defaultValues,
   });
 
-  function onSubmit(data: JournalValues) {
+  function onSubmit(data: Journal) {
     console.log(data);
     toast({
       title: 'You submitted the following values:',

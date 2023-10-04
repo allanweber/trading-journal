@@ -1,4 +1,4 @@
-import { getJournal, getJournals } from '@/model/journal';
+import { getJournal, getJournals } from '@/lib/journals';
 import { z } from 'zod';
 import { privateProcedure, router } from './trpc';
 
