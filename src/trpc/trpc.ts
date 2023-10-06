@@ -1,8 +1,9 @@
 import { authOptions } from '@/lib/auth';
 import { TRPCError, initTRPC } from '@trpc/server';
 import { getServerSession } from 'next-auth';
+import superjson from 'superjson';
 
-const t = initTRPC.create();
+const t = initTRPC.create({ transformer: superjson });
 const middleware = t.middleware;
 
 const isAuth = middleware(async (opts) => {
