@@ -23,10 +23,12 @@ import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { InputMessage } from '@/components/InputMessage';
 import { NumberInput } from '@/components/NumberInput';
 import { Journal, journalSchema } from '@/model/journal';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function JournalForm({ journalId }: { journalId?: string }) {
   const t = useTranslations('journal-form');
+  const router = useRouter();
   const [values, setValues] = useState<Journal>({
     name: '',
     startDate: new Date(),
@@ -34,6 +36,19 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
     currency: 'USD',
   });
   const [error, setError] = useState<any>(null);
+
+  const mutation = trpc.journalSave.useMutation({
+    onSuccess: (data) => {
+      toast({
+        title: 'Journal saved',
+        description: `Journal ${data.name} saved successfully.`,
+      });
+      router.push('/trading/journals');
+    },
+    onError: (error) => {
+      setError(error);
+    },
+  });
 
   if (journalId) {
     trpc.journal.useQuery(journalId, {
@@ -53,14 +68,7 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
   });
 
   function onSubmit(data: Journal) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    mutation.mutate(data);
   }
 
   return (
