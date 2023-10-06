@@ -11,16 +11,16 @@ import {
 
 type Props = {
   onValueChange: (value: string) => void;
-  defaultValue: string;
+  value: string;
   [x: string]: any;
 };
 
 export default function CurrencySelect(props: Props) {
   const t = useTranslations('currency');
-  const { onValueChange, defaultValue, ...rest } = props;
+  const { onValueChange, value: defaultValue, ...rest } = props;
 
   return (
-    <Select onValueChange={onValueChange} defaultValue={defaultValue} {...rest}>
+    <Select onValueChange={onValueChange} value={defaultValue} {...rest}>
       <FormControl>
         <SelectTrigger>
           <SelectValue placeholder={t('placeholder')} />

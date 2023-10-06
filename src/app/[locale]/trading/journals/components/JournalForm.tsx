@@ -23,23 +23,36 @@ import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { InputMessage } from '@/components/InputMessage';
 import { NumberInput } from '@/components/NumberInput';
 import { Journal, journalSchema } from '@/model/journal';
+import { useState } from 'react';
 
-export default function JournalForm({ initial }: { initial?: Journal }) {
+export default function JournalForm({ journalId }: { journalId?: string }) {
   const t = useTranslations('journal-form');
-  const { data: journal, error } = trpc.journal.useQuery('params.journalId');
+  const [values, setValues] = useState<Journal>({
+    name: '',
+    startDate: new Date(),
+    startBalance: 0,
+    currency: 'USD',
+  });
+  const [error, setError] = useState<any>(null);
 
-  // Get from API
-  const defaultValues: Partial<Journal> = {
-    id: '',
-  };
+  if (journalId) {
+    trpc.journal.useQuery(journalId, {
+      onSuccess: (data) => {
+        setValues({ ...data, startDate: new Date(data.startDate) });
+      },
+      onError: (error) => {
+        setError(error);
+      },
+    });
+  }
 
   const form = useForm<Journal>({
     resolver: zodResolver(journalSchema),
-    defaultValues: defaultValues,
+    defaultValues: values,
+    values,
   });
 
   function onSubmit(data: Journal) {
-    console.log(data);
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -114,9 +127,10 @@ export default function JournalForm({ initial }: { initial?: Journal }) {
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>{t('currency-label')}</FormLabel>
+
                 <CurrencySelect
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
                 />
                 <FormDescription>{t('currency-description')}</FormDescription>
                 <InputMessage form={form} field="currency" translations={t} />

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const journalSchema = z.object({
-  id: z.string().optional(),
+  _id: z.string().optional(),
   name: z
     .string({
       required_error: 'name-required',

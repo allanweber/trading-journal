@@ -30,14 +30,14 @@ import { DataTableToolbar, ToolbarOptions } from './DataTableToolbar';
 import { useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends { _id?: string }, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[] | undefined;
   toolbarOptions?: ToolbarOptions;
   isLoading?: boolean;
 }
 
-export function DataTable<TData extends { id: string }, TValue>({
+export function DataTable<TData extends { _id?: string }, TValue>({
   columns,
   data,
   toolbarOptions,
@@ -58,7 +58,7 @@ export function DataTable<TData extends { id: string }, TValue>({
       rowSelection,
       columnFilters,
     },
-    getRowId: (row) => row.id,
+    getRowId: (row) => row._id ?? '',
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,

@@ -9,7 +9,7 @@ import { columns } from './columns';
 
 export function JournalTable() {
   const t = useTranslations('journals');
-  const { data: journals, isLoading, error } = trpc.journals.useQuery();
+  const { data, isLoading, error } = trpc.journals.useQuery();
 
   const toolbarOptions = {
     inputFilter: {
@@ -35,7 +35,7 @@ export function JournalTable() {
     <>
       <ErrorDisplay error={error} />
       <DataTable
-        data={journals}
+        data={data}
         columns={columns}
         toolbarOptions={toolbarOptions}
         isLoading={isLoading}

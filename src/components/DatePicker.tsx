@@ -11,7 +11,7 @@ import { enGB, ptBR } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DateDisplay from './DateDisplay';
 import { Separator } from './ui/separator';
 
@@ -34,6 +34,10 @@ export default function DatePicker(props: Props) {
   const [timeValue, setTimeValue] = useState<string>(
     value && withTime ? `${value.getHours()}:${value.getMinutes()}` : '00:00'
   );
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value]);
 
   const todayClick = () => {
     const today = new Date();

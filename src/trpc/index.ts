@@ -5,8 +5,7 @@ import { privateProcedure, router } from './trpc';
 export const appRouter = router({
   journals: privateProcedure.query(async ({ ctx }) => {
     const { userEmail } = ctx;
-    const journals = await getJournals(userEmail);
-    return journals;
+    return await getJournals(userEmail);
   }),
   journal: privateProcedure.input(z.string()).query(async ({ ctx, input }) => {
     const { userEmail } = ctx;
