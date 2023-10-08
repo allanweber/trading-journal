@@ -2,6 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 
+import ActionConfirmation from '@/components/ActionConfirmation';
 import DateDisplay from '@/components/DateDisplay';
 import NumberDisplay from '@/components/NumberDisplay';
 import { DataTableColumnHeader } from '@/components/datatable/DataTableColumnHeader';
@@ -9,9 +10,11 @@ import DataTableLink from '@/components/datatable/DataTableLink';
 import { getSymbol } from '@/model/currency/currencies';
 import { Journal } from '@/model/journal';
 import { TrashIcon } from 'lucide-react';
-import Link from 'next/link';
 
-export const columns: ColumnDef<Journal>[] = [
+export const columns = (
+  actionsTitle: string,
+  onDeleteConfirm: (id: string) => void
+): ColumnDef<Journal>[] => [
   {
     accessorKey: 'name',
     header: ({ column }) => <DataTableColumnHeader column={column} />,
@@ -67,9 +70,12 @@ export const columns: ColumnDef<Journal>[] = [
   {
     id: 'actions',
     cell: ({ row }) => (
-      <Link href="#">
+      <ActionConfirmation
+        actionTitle={actionsTitle}
+        onConfirm={() => onDeleteConfirm(row.id)}
+      >
         <TrashIcon className="h-4 w-4" />
-      </Link>
+      </ActionConfirmation>
     ),
   },
 ];

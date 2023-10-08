@@ -47,3 +47,13 @@ export async function saveJournal(userEmail: string, journal: Journal) {
     .then(() => journal);
   return result;
 }
+
+export async function deleteJournal(userEmail: string, journalId: string) {
+  const client = await mongoClient;
+  const dbName = getDbName(userEmail);
+  const result = await client
+    .db(dbName)
+    .collection(COLLECTION)
+    .deleteOne({ _id: new ObjectId(journalId) });
+  return result;
+}

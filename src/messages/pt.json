@@ -46,7 +46,8 @@
     "input-filter-placeholder": "Filtrar por nome",
     "new-journal": "Novo Diário",
     "new-journal-description": "Crie um novo diário para começar a negociar",
-    "edit-journal": "Editar Diário"
+    "edit-journal": "Editar Diário",
+    "delete-journal": "Deletar Diário"
   },
   "journal-form": {
     "name-min": "Nome deve ter pelo menos 5 caracteres",
@@ -99,5 +100,10 @@
   },
   "data-table": {
     "no-results": "Nenhum resultado encontrado"
+  },
+  "action-confirm": {
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "default-title": "Você tem certeza?"
   }
 }

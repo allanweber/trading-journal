@@ -46,7 +46,8 @@
     "input-filter-placeholder": "Filter by name",
     "new-journal": "New Journal",
     "new-journal-description": "Create a new journal to start trading",
-    "edit-journal": "Edit Journal"
+    "edit-journal": "Edit Journal",
+    "delete-journal": "Delete Journal"
   },
   "journal-form": {
     "name-min": "Name must be at least 5 characters long",
@@ -99,5 +100,10 @@
   },
   "data-table": {
     "no-results": "No results found"
+  },
+  "action-confirm": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "default-title": "Are you sure?"
   }
 }
