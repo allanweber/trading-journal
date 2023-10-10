@@ -20,7 +20,8 @@ export const journalSchema = z.object({
       required_error: 'start-balance-required',
       invalid_type_error: 'start-balance-positive',
     })
-    .positive({ message: 'start-balance-positive' }),
+    .positive({ message: 'start-balance-positive' })
+    .max(9999999999, { message: 'start-balance-max' }),
   currency: z.string({
     required_error: 'currency-required',
   }),

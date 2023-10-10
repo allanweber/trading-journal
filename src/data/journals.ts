@@ -1,6 +1,6 @@
 import mongoClient from '@/lib/mongodb';
 import { getDbName } from '@/lib/utils';
-import { Journal } from '@/model/journal';
+import { Journal, journalSchema } from '@/model/journal';
 import { TRPCClientError } from '@trpc/client';
 import { ObjectId } from 'mongodb';
 
@@ -33,6 +33,11 @@ export async function getJournal(userEmail: string, journalId: string) {
 }
 
 export async function saveJournal(userEmail: string, journal: Journal) {
+  const parse = journalSchema.safeParse(journal);
+  if (!parse.success) {
+    throw new TRPCClientError(parse.error.message);
+  }
+
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const { _id, ...record } = journal;
