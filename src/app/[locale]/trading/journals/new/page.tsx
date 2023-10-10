@@ -7,10 +7,10 @@ export default function Page() {
   return (
     <>
       <PageHeader>
-        <Title>
-          {t('new-journal')}
+        <div>
+          <Title>{t('new-journal')}</Title>
           <Subtitle>{t('new-journal-description')}</Subtitle>
-        </Title>
+        </div>
       </PageHeader>
       <JournalForm />
     </>

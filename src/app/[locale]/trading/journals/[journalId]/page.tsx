@@ -8,10 +8,10 @@ export default function Page({ params }: { params: { journalId: string } }) {
   return (
     <>
       <PageHeader>
-        <Title>
-          {t('new-journal')}
+        <div>
+          <Title>{t('new-journal')}</Title>
           <Subtitle>{t('edit-journal')}</Subtitle>
-        </Title>
+        </div>
       </PageHeader>
       <JournalForm journalId={params.journalId} />
     </>

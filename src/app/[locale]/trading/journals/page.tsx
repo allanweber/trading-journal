@@ -9,10 +9,10 @@ export default function Journals() {
   return (
     <>
       <PageHeader>
-        <Title>
-          {t('title')}
+        <div>
+          <Title>{t('title')}</Title>
           <Subtitle>{t('subtitle')}</Subtitle>
-        </Title>
+        </div>
         <Action>
           <Button asChild>
             <Link href="/trading/journals/new">{t('create')}</Link>

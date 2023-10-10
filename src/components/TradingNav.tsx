@@ -44,7 +44,11 @@ export default function TradingNav() {
             'text-sm font-medium transition-colors hover:text-primary'
           )}
         >
-          {t(item.key)}
+          {active(item.href) ? (
+            <h1>{t(item.key)}</h1>
+          ) : (
+            <span>{t(item.key)}</span>
+          )}
         </Link>
       ))}
     </nav>
