@@ -16,14 +16,14 @@ export function JournalTable() {
     isLoading,
     error: queryError,
     refetch,
-  } = trpc.journals.useQuery();
+  } = trpc.journal.list.useQuery();
   const [error, setError] = useState<any>();
 
   useEffect(() => {
     setError(queryError);
   }, [queryError]);
 
-  const deleteMutation = trpc.journalDelete.useMutation({
+  const deleteMutation = trpc.journal.delete.useMutation({
     onSuccess: () => {
       toast({
         title: 'Journal deleted',

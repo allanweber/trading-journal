@@ -26,7 +26,7 @@ export default function JournalSelect(props: Props) {
 
   const [journals, setJournals] = useState<Journal[]>([]);
 
-  trpc.journals.useQuery(undefined, {
+  trpc.journal.list.useQuery(undefined, {
     onSuccess: (data) => {
       setJournals(data);
     },

@@ -37,7 +37,7 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
   });
   const [error, setError] = useState<any>(null);
 
-  const mutation = trpc.journalSave.useMutation({
+  const mutation = trpc.journal.save.useMutation({
     onSuccess: (data) => {
       toast({
         title: 'Journal saved',
@@ -51,7 +51,7 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
   });
 
   if (journalId) {
-    trpc.journal.useQuery(journalId, {
+    trpc.journal.single.useQuery(journalId, {
       onSuccess: (data) => {
         setValues(data);
       },
