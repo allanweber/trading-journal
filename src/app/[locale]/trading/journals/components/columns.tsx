@@ -7,7 +7,7 @@ import DateDisplay from '@/components/DateDisplay';
 import NumberDisplay from '@/components/NumberDisplay';
 import { DataTableColumnHeader } from '@/components/datatable/DataTableColumnHeader';
 import DataTableLink from '@/components/datatable/DataTableLink';
-import { getSymbol } from '@/model/currency/currencies';
+import { getSymbol } from '@/model/currency';
 import { Journal } from '@/model/journal';
 import { TrashIcon } from 'lucide-react';
 

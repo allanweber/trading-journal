@@ -4,9 +4,8 @@ import { trpc } from '@/app/_trpc/client';
 import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { DataTable } from '@/components/datatable/DataTable';
 import { toast } from '@/components/ui/use-toast';
-import { currencies } from '@/model/currency/currencies';
+import { currencies } from '@/model/currency';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { columns } from './columns';
 
@@ -19,7 +18,6 @@ export function JournalTable() {
     refetch,
   } = trpc.journals.useQuery();
   const [error, setError] = useState<any>();
-  const router = useRouter();
 
   useEffect(() => {
     setError(queryError);

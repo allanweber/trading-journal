@@ -53,7 +53,7 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
   if (journalId) {
     trpc.journal.useQuery(journalId, {
       onSuccess: (data) => {
-        setValues({ ...data, startDate: new Date(data.startDate) });
+        setValues(data);
       },
       onError: (error) => {
         setError(error);

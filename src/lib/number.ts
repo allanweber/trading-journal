@@ -1,4 +1,4 @@
-import { getSymbol } from '@/model/currency/currencies';
+import { getSymbol } from '@/model/currency';
 
 type CurrencyFormatterOptions = {
   digits?: number;

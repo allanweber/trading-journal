@@ -1,4 +1,4 @@
-import { currencies } from '@/model/currency/currencies';
+import { currencies } from '@/model/currency';
 import { useTranslations } from 'next-intl';
 import { FormControl } from './ui/form';
 import {

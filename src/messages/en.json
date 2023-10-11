@@ -1,7 +1,7 @@
 {
   "nav": {
     "dashboard": "Dashboard",
-    "entries": "Entries",
+    "entries": "Trades",
     "journals": "Journals"
   },
   "user-nav": {
@@ -14,7 +14,9 @@
     "title": "Dashboard and Charts"
   },
   "entries": {
-    "title": "Entries"
+    "title": "Trades",
+    "subtitle": "Manage your trades",
+    "create": "Insert {entry}"
   },
   "user-settings": {
     "title": "Settings",
@@ -71,6 +73,69 @@
     "start-balance-positive": "Start balance must be greater than 0",
     "start-balance-max": "Start balance must be less than 1000000000"
   },
+  "entry-form": {
+    "journal-label": "Journal",
+    "journal-required": "Journal is required",
+    "journal-placeholder": "Select a journal",
+    "journal-description": "The journal where this entry will be inserted",
+    "date-label": "Date",
+    "date-required": "Date is required",
+    "date-description": "The date of this entry",
+    "date-placeholder": "Select a date for this entry",
+    "price-label": "Price",
+    "price-required": "Price is required",
+    "price-placeholder": "Enter the price of this entry",
+    "price-description": "The price of one unit this entry",
+    "price-positive": "Price must be greater than 0",
+    "price-max": "Price must be less than 1000000000",
+    "entry-type-label": "Entry Type",
+    "entry-type-required": "Entry type is required",
+    "entry-type-placeholder": "Select an entry type",
+    "entry-type-description": "The type of this entry",
+    "description-label": "Description",
+    "description-max": "Description must be at most 100 characters long",
+    "description-placeholder": "Enter a description for this entry",
+    "description-description": "The description of this entry",
+    "symbol-label": "Symbol",
+    "symbol-required": "Symbol is required",
+    "symbol-placeholder": "Enter the symbol of this entry",
+    "symbol-description": "The symbol of this entry",
+    "symbol-max": "Symbol must be at most 30 characters long",
+    "direction-label": "Direction",
+    "direction-required": "Direction is required",
+    "direction-placeholder": "Select a trade direction",
+    "direction-description": "The direction of this entry",
+    "size-label": "Size",
+    "size-required": "Size is required",
+    "size-placeholder": "Enter the size of this entry",
+    "size-description": "The size of this entry",
+    "size-positive": "Size must be greater than 0",
+    "size-max": "Size must be less than 1000000000",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "deposit-form": {
+    "journal-label": "Journal",
+    "journal-required": "Journal is required",
+    "journal-placeholder": "Select a journal",
+    "journal-description": "The journal where this deposit will be inserted",
+    "date-label": "Deposit Date",
+    "date-required": "Date is required",
+    "date-description": "The date of this entry",
+    "date-placeholder": "Select a date for this entry",
+    "price-label": "Deposit value",
+    "price-required": "Deposit value is required",
+    "price-placeholder": "Enter the deposit value",
+    "price-description": "The value of this deposit",
+    "price-positive": "Deposit value must be greater than 0",
+    "price-max": "Deposit value must be less than 1000000000",
+    "description-label": "Deposit Description (optional)",
+    "description-max": "Description must be at most 100 characters long",
+    "description-placeholder": "Enter a description for this deposit",
+    "description-description": "The description of this deposit",
+    "save": "Save Deposit",
+    "cancel": "Cancel"
+  },
   "currency": {
     "USD": "US Dollar",
     "EUR": "Euro",
@@ -106,5 +171,19 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "default-title": "Are you sure?"
+  },
+  "add-entry-button": {
+    "add-entry": "Add Trade",
+    "select-type": "Add by type"
+  },
+  "trade-types": {
+    "TRADE": "Trade",
+    "WITHDRAWAL": "Withdrawal",
+    "DEPOSIT": "Deposit",
+    "TAXES": "Taxes",
+    "DIVIDEND": "Dividend"
+  },
+  "journal-select": {
+    "placeholder": "Select a journal"
   }
 }
