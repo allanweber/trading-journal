@@ -34,7 +34,7 @@ const minimalEntry = z.object({
     .optional(),
 });
 
-export const entrySchema = minimalEntry.extend({
+export const tradeSchema = minimalEntry.extend({
   symbol: z
     .string({
       required_error: 'symbol-required',
@@ -69,8 +69,17 @@ export const dividendSchema = minimalEntry.extend({
     }),
 });
 
-export type Entry = z.infer<typeof entrySchema>;
+export const entrySchema = z.union([
+  depositSchema,
+  withdrawalSchema,
+  tradeSchema,
+  taxesSchema,
+  dividendSchema,
+]);
+
+export type Trade = z.infer<typeof tradeSchema>;
 export type Deposit = z.infer<typeof depositSchema>;
 export type Withdrawal = z.infer<typeof withdrawalSchema>;
 export type Taxes = z.infer<typeof taxesSchema>;
 export type Dividend = z.infer<typeof dividendSchema>;
+export type Entry = z.infer<typeof entrySchema>;

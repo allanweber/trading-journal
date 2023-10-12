@@ -13,7 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
@@ -29,6 +29,7 @@ import { useState } from 'react';
 export default function JournalForm({ journalId }: { journalId?: string }) {
   const t = useTranslations('journal-form');
   const router = useRouter();
+  const locale = useLocale();
   const [values, setValues] = useState<Journal>({
     name: '',
     startDate: new Date(),
@@ -40,10 +41,10 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
   const mutation = trpc.journal.save.useMutation({
     onSuccess: (data) => {
       toast({
-        title: 'Journal saved',
-        description: `Journal ${data.name} saved successfully.`,
+        title: t('success-title'),
+        description: t('success-description', { journal: data.name }),
       });
-      router.push('/trading/journals');
+      router.push(`/${locale}/trading/journals`);
     },
     onError: (error) => {
       setError(error);

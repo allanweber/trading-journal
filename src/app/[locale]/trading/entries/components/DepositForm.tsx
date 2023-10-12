@@ -1,5 +1,6 @@
 'use client';
 
+import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
 import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { InputMessage } from '@/components/InputMessage';
@@ -19,22 +20,44 @@ import { toast } from '@/components/ui/use-toast';
 import { Deposit, depositSchema } from '@/model/entry';
 import { EntryType } from '@/model/entryType';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function DepositForm() {
+export default function DepositForm({ depositId }: { depositId?: string }) {
   const t = useTranslations('deposit-form');
-
+  const router = useRouter();
+  const locale = useLocale();
   const [values, setValues] = useState<Deposit>({
-    journalId: '',
-    date: new Date(),
-    price: 0,
     entryType: EntryType.Deposit,
-    description: '',
-  });
+  } as Deposit);
   const [error, setError] = useState<any>(null);
+
+  const mutation = trpc.deposit.save.useMutation({
+    onSuccess: () => {
+      toast({
+        title: t('success-title'),
+        description: t('success-description'),
+      });
+      router.push(`/${locale}/trading/entries`);
+    },
+    onError: (error) => {
+      setError(error);
+    },
+  });
+
+  if (depositId) {
+    trpc.deposit.single.useQuery(depositId, {
+      onSuccess: (data) => {
+        setValues(data);
+      },
+      onError: (error) => {
+        setError(error);
+      },
+    });
+  }
 
   const form = useForm<Deposit>({
     resolver: zodResolver(depositSchema),
@@ -43,14 +66,7 @@ export default function DepositForm() {
   });
 
   function onSubmit(data: Deposit) {
-    toast({
-      title: 'Deposit saved',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    mutation.mutate(data);
   }
 
   return (
@@ -100,7 +116,7 @@ export default function DepositForm() {
               <FormItem className="flex flex-col">
                 <FormLabel>{t('price-label')}</FormLabel>
 
-                <NumberInput {...field} />
+                <NumberInput {...field} c />
 
                 <FormDescription>{t('price-description')}</FormDescription>
                 <InputMessage form={form} field="price" translations={t} />
