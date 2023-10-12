@@ -100,6 +100,7 @@ export default function DepositForm({ depositId }: { depositId?: string }) {
                 <FormLabel>{t('date-label')}</FormLabel>
 
                 <DatePicker
+                  withTime
                   value={field.value}
                   onSelect={field.onChange}
                   placeholder={t('date-placeholder')}
@@ -116,7 +117,7 @@ export default function DepositForm({ depositId }: { depositId?: string }) {
               <FormItem className="flex flex-col">
                 <FormLabel>{t('price-label')}</FormLabel>
 
-                <NumberInput {...field} c />
+                <NumberInput {...field} />
 
                 <FormDescription>{t('price-description')}</FormDescription>
                 <InputMessage form={form} field="price" translations={t} />

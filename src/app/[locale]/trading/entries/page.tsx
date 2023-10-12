@@ -1,6 +1,7 @@
 import AddEntryButton from '@/components/AddEntryButton';
 import { Action, PageHeader, Subtitle, Title } from '@/components/PageHeader';
 import { useTranslations } from 'next-intl';
+import { EntryTable } from './components/EntryTable';
 
 export default function Entries() {
   const t = useTranslations('entries');
@@ -15,6 +16,7 @@ export default function Entries() {
           <AddEntryButton />
         </Action>
       </PageHeader>
+      <EntryTable />
     </>
   );
 }

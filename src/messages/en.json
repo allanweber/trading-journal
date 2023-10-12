@@ -16,7 +16,12 @@
   "entries": {
     "title": "Trades",
     "subtitle": "Manage your trades",
-    "create": "Insert {entry}"
+    "create": "Insert {entry}",
+    "input-filter-placeholder": "Filter by name",
+    "delete-entry": "Delete Trade",
+    "delete-title": "Entry Deleted",
+    "delete-success": "Entry deleted successfully",
+    "journal-filter": "Journal"
   },
   "user-settings": {
     "title": "Settings",
@@ -49,7 +54,10 @@
     "new-journal": "New Journal",
     "new-journal-description": "Create a new journal to start trading",
     "edit-journal": "Edit Journal",
-    "delete-journal": "Delete Journal"
+    "delete-journal": "Delete Journal",
+    "delete-title": "Journal Deleted",
+    "delete-success": "Journal deleted successfully",
+    "currency-filter": "Currency"
   },
   "journal-form": {
     "name-min": "Name must be at least 5 characters long",
@@ -116,7 +124,13 @@
     "name": "Name",
     "startDate": "Start Date",
     "startBalance": "Start Balance",
-    "currency": "Currency"
+    "currency": "Currency",
+    "date": "Date",
+    "trade": "Trade",
+    "journal": "Journal",
+    "price": "Price",
+    "symbol": "Symbol",
+    "entryType": "Type"
   },
   "pagination": {
     "rows-count": "{count, plural, =0 {none row} =1 {1 row} other {# rows}} in total.",

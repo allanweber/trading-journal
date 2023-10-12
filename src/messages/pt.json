@@ -16,7 +16,12 @@
   "entries": {
     "title": "Trades",
     "subtitle": "Gerencie seus trades",
-    "create": "Inserir {entry}"
+    "create": "Inserir {entry}",
+    "input-filter-placeholder": "Filtrar por nome",
+    "delete-entry": "Deletar Trade",
+    "delete-title": "Trade removido",
+    "delete-success": "O trade foi removido com sucesso",
+    "journal-filter": "Diário"
   },
   "user-settings": {
     "title": "Configurações",
@@ -49,7 +54,10 @@
     "new-journal": "Novo Diário",
     "new-journal-description": "Crie um novo diário para começar a negociar",
     "edit-journal": "Editar Diário",
-    "delete-journal": "Deletar Diário"
+    "delete-journal": "Deletar Diário",
+    "delete-title": "Diário removido",
+    "delete-success": "O diário foi removido com sucesso",
+    "currency-filter": "Moeda"
   },
   "journal-form": {
     "name-min": "Nome deve ter pelo menos 5 caracteres",
@@ -116,7 +124,11 @@
     "name": "Nome",
     "startDate": "Data de Início",
     "startBalance": "Saldo Inicial",
-    "currency": "Moeda"
+    "currency": "Moeda",
+    "date": "Data",
+    "trade": "Trade",
+    "journal": "Diário",
+    "price": "Preço"
   },
   "pagination": {
     "rows-count": "{count, plural, =0 {nenhuma linha} =1 {1 linha} other {# linhas}} no total.",

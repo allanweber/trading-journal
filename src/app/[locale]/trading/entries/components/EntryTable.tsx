@@ -4,26 +4,35 @@ import { trpc } from '@/app/_trpc/client';
 import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { DataTable } from '@/components/datatable/DataTable';
 import { toast } from '@/components/ui/use-toast';
-import { currencies } from '@/model/currency';
+import { Journal } from '@/model/journal';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { columns } from './columns';
 
-export function JournalTable() {
-  const t = useTranslations('journals');
+export function EntryTable() {
+  const t = useTranslations('entries');
+  const tTradeType = useTranslations('trade-types');
+  const [journalsToFilter, setJournalsToFilter] = useState<Journal[]>([]);
   const {
     data,
     isLoading,
     error: queryError,
     refetch,
-  } = trpc.journal.list.useQuery();
+  } = trpc.entry.list.useQuery();
   const [error, setError] = useState<any>();
+
+  const { data: journals } = trpc.journal.list.useQuery();
+  useEffect(() => {
+    if (journals) {
+      setJournalsToFilter(journals);
+    }
+  }, [journals]);
 
   useEffect(() => {
     setError(queryError);
   }, [queryError]);
 
-  const deleteMutation = trpc.journal.delete.useMutation({
+  const deleteMutation = trpc.entry.delete.useMutation({
     onSuccess: () => {
       toast({
         title: t('delete-title'),
@@ -36,26 +45,26 @@ export function JournalTable() {
     },
   });
 
-  const onDeleteConfirm = (journalId: string) => {
-    deleteMutation.mutate(journalId);
+  const onDeleteConfirm = (entryId: string) => {
+    deleteMutation.mutate(entryId);
   };
 
-  const tableColumns = columns(t('delete-journal'), onDeleteConfirm);
+  const tableColumns = columns(t('delete-entry'), tTradeType, onDeleteConfirm);
 
   const toolbarOptions = {
     inputFilter: {
       placeholder: t('input-filter-placeholder'),
-      columnId: 'name',
+      columnId: 'trade',
     },
     showViewOptions: true,
     filters: [
       {
-        columnId: 'currency',
-        title: t('currency-filter'),
-        options: currencies.map((currency) => {
+        columnId: 'journal',
+        title: t('journal-filter'),
+        options: journalsToFilter.map((journal) => {
           return {
-            label: `${currency.value} - ${currency.symbol}`,
-            value: currency.value,
+            label: journal.name,
+            value: journal._id!,
           };
         }),
       },
@@ -68,7 +77,7 @@ export function JournalTable() {
       <DataTable
         data={data}
         columns={tableColumns}
-        toolbarOptions={toolbarOptions}
+        toolbarOptions={toolbarOptions!}
         isLoading={isLoading}
       />
     </>

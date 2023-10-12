@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Direction } from './direction';
 import { EntryType } from './entryType';
+import { journalSchema } from './journal';
 
 const minimalEntry = z.object({
   _id: z.string().optional(),
@@ -69,13 +70,15 @@ export const dividendSchema = minimalEntry.extend({
     }),
 });
 
-export const entrySchema = z.union([
-  depositSchema,
-  withdrawalSchema,
-  tradeSchema,
-  taxesSchema,
-  dividendSchema,
-]);
+export const entrySchema = minimalEntry
+  .extend({
+    journal: journalSchema,
+  })
+  .merge(tradeSchema)
+  .merge(depositSchema)
+  .merge(withdrawalSchema)
+  .merge(taxesSchema)
+  .merge(dividendSchema);
 
 export type Trade = z.infer<typeof tradeSchema>;
 export type Deposit = z.infer<typeof depositSchema>;

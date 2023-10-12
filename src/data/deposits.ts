@@ -34,7 +34,7 @@ export async function saveDeposit(userEmail: string, deposit: Deposit) {
     .collection(COLLECTION)
     .updateOne(
       { _id: new ObjectId(_id) },
-      { $set: { ...record } },
+      { $set: { ...record, journalId: new ObjectId(record.journalId) } },
       { upsert: true }
     )
     .then(() => deposit);
