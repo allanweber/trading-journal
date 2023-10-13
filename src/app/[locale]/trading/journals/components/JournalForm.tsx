@@ -19,8 +19,8 @@ import { useForm } from 'react-hook-form';
 
 import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
-import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { InputMessage } from '@/components/InputMessage';
+import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
 import { Journal, journalSchema } from '@/model/journal';
 import { useRouter } from 'next/navigation';
@@ -74,7 +74,7 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
 
   return (
     <>
-      <ErrorDisplay error={error} />
+      <MessageDisplay message={error} variant="destructive" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

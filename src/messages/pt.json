@@ -21,7 +21,9 @@
     "delete-entry": "Deletar Trade",
     "delete-title": "Trade removido",
     "delete-success": "O trade foi removido com sucesso",
-    "journal-filter": "Diário"
+    "journal-filter": "Diário",
+    "journal-missing-message": "Você precisa criar um diário antes de adicionar um trade",
+    "add-journal": "Criar Diário"
   },
   "user-settings": {
     "title": "Configurações",

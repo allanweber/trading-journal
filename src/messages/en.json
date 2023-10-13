@@ -21,7 +21,9 @@
     "delete-entry": "Delete Trade",
     "delete-title": "Entry Deleted",
     "delete-success": "Entry deleted successfully",
-    "journal-filter": "Journal"
+    "journal-filter": "Journal",
+    "journal-missing-message": "You need to create a journal before adding a trade",
+    "add-journal": "Add a journal"
   },
   "user-settings": {
     "title": "Settings",

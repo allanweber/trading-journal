@@ -1,7 +1,7 @@
 'use client';
 
 import { trpc } from '@/app/_trpc/client';
-import { ErrorDisplay } from '@/components/ErrorDisplay';
+import { MessageDisplay } from '@/components/MessageDisplay';
 import { DataTable } from '@/components/datatable/DataTable';
 import { toast } from '@/components/ui/use-toast';
 import { currencies } from '@/model/currency';
@@ -64,7 +64,7 @@ export function JournalTable() {
 
   return (
     <>
-      <ErrorDisplay error={error} />
+      <MessageDisplay message={error} variant="destructive" />
       <DataTable
         data={data}
         columns={tableColumns}

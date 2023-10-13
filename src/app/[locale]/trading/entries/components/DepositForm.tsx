@@ -2,9 +2,9 @@
 
 import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
-import { ErrorDisplay } from '@/components/ErrorDisplay';
 import { InputMessage } from '@/components/InputMessage';
 import JournalSelect from '@/components/JournalSelect';
+import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
 import { Button } from '@/components/ui/button';
 import {
@@ -71,7 +71,7 @@ export default function DepositForm({ depositId }: { depositId?: string }) {
 
   return (
     <>
-      <ErrorDisplay error={error} />
+      <MessageDisplay message={error} variant="destructive" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

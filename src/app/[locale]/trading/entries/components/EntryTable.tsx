@@ -1,7 +1,7 @@
 'use client';
 
 import { trpc } from '@/app/_trpc/client';
-import { ErrorDisplay } from '@/components/ErrorDisplay';
+import { MessageDisplay } from '@/components/MessageDisplay';
 import { DataTable } from '@/components/datatable/DataTable';
 import { toast } from '@/components/ui/use-toast';
 import { Journal } from '@/model/journal';
@@ -9,10 +9,10 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { columns } from './columns';
 
-export function EntryTable() {
+export function EntryTable({ journals }: { journals: Journal[] }) {
   const t = useTranslations('entries');
   const tTradeType = useTranslations('trade-types');
-  const [journalsToFilter, setJournalsToFilter] = useState<Journal[]>([]);
+
   const {
     data,
     isLoading,
@@ -20,13 +20,6 @@ export function EntryTable() {
     refetch,
   } = trpc.entry.list.useQuery();
   const [error, setError] = useState<any>();
-
-  const { data: journals } = trpc.journal.list.useQuery();
-  useEffect(() => {
-    if (journals) {
-      setJournalsToFilter(journals);
-    }
-  }, [journals]);
 
   useEffect(() => {
     setError(queryError);
@@ -61,7 +54,7 @@ export function EntryTable() {
       {
         columnId: 'journal',
         title: t('journal-filter'),
-        options: journalsToFilter.map((journal) => {
+        options: journals.map((journal) => {
           return {
             label: journal.name,
             value: journal._id!,
@@ -71,9 +64,13 @@ export function EntryTable() {
     ],
   };
 
+  if (journals.length === 0) {
+    return <MessageDisplay message={t('journal-missing-message')} />;
+  }
+
   return (
     <>
-      <ErrorDisplay error={error} />
+      <MessageDisplay message={error} variant="destructive" />
       <DataTable
         data={data}
         columns={tableColumns}
