@@ -4,15 +4,14 @@ import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
 import DirectionSelect from '@/components/DirectionSelect';
 import FormButtonContainer from '@/components/FormButtonContainer';
-import { InputMessage } from '@/components/InputMessage';
 import JournalSelect from '@/components/JournalSelect';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
+import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -99,12 +98,10 @@ export default function TradeForm({
                           value={field.value}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {t('journal-description')}
-                      </FormDescription>
-                      <InputMessage
+                      <FormDescriptionOrMessage
                         form={form}
-                        field="journalId"
+                        fieldName="journalId"
+                        descriptionKey="journal-description"
                         translations={t}
                       />
                     </FormItem>
@@ -125,12 +122,10 @@ export default function TradeForm({
                           {...field}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {t('symbol-description')}
-                      </FormDescription>
-                      <InputMessage
+                      <FormDescriptionOrMessage
                         form={form}
-                        field="symbol"
+                        fieldName="symbol"
+                        descriptionKey="symbol-description"
                         translations={t}
                       />
                     </FormItem>
@@ -151,12 +146,10 @@ export default function TradeForm({
                           value={field.value}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {t('direction-description')}
-                      </FormDescription>
-                      <InputMessage
+                      <FormDescriptionOrMessage
                         form={form}
-                        field="direction"
+                        fieldName="direction"
+                        descriptionKey="direction-description"
                         translations={t}
                       />
                     </FormItem>
@@ -170,17 +163,23 @@ export default function TradeForm({
                   name="date"
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
-                      <FormLabel>{t('date-label')}</FormLabel>
+                      <FormLabel className="mb-2">{t('date-label')}</FormLabel>
 
-                      <DatePicker
-                        withTime
-                        value={field.value}
-                        onSelect={field.onChange}
-                        placeholder={t('date-placeholder')}
+                      <FormControl>
+                        <DatePicker
+                          withTime
+                          value={field.value}
+                          onSelect={field.onChange}
+                          placeholder={t('date-placeholder')}
+                        />
+                      </FormControl>
+
+                      <FormDescriptionOrMessage
+                        form={form}
+                        fieldName="date"
+                        descriptionKey="date-description"
+                        translations={t}
                       />
-
-                      <FormDescription>{t('date-description')}</FormDescription>
-                      <InputMessage form={form} field="date" translations={t} />
                     </FormItem>
                   )}
                 />
@@ -194,14 +193,14 @@ export default function TradeForm({
                     <FormItem className="flex flex-col">
                       <FormLabel>{t('price-label')}</FormLabel>
 
-                      <NumberInput {...field} />
+                      <FormControl>
+                        <NumberInput {...field} />
+                      </FormControl>
 
-                      <FormDescription>
-                        {t('price-description')}
-                      </FormDescription>
-                      <InputMessage
+                      <FormDescriptionOrMessage
                         form={form}
-                        field="price"
+                        fieldName="price"
+                        descriptionKey="price-description"
                         translations={t}
                       />
                     </FormItem>
@@ -217,10 +216,16 @@ export default function TradeForm({
                     <FormItem className="flex flex-col">
                       <FormLabel>{t('size-label')}</FormLabel>
 
-                      <NumberInput {...field} />
+                      <FormControl>
+                        <NumberInput {...field} />
+                      </FormControl>
 
-                      <FormDescription>{t('size-description')}</FormDescription>
-                      <InputMessage form={form} field="size" translations={t} />
+                      <FormDescriptionOrMessage
+                        form={form}
+                        fieldName="size"
+                        descriptionKey="size-description"
+                        translations={t}
+                      />
                     </FormItem>
                   )}
                 />
@@ -239,12 +244,10 @@ export default function TradeForm({
                           {...field}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {t('description-description')}
-                      </FormDescription>
-                      <InputMessage
+                      <FormDescriptionOrMessage
                         form={form}
-                        field="description"
+                        fieldName="description"
+                        descriptionKey="description-description"
                         translations={t}
                       />
                     </FormItem>

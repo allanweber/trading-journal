@@ -3,15 +3,14 @@
 import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
 import FormButtonContainer from '@/components/FormButtonContainer';
-import { InputMessage } from '@/components/InputMessage';
 import JournalSelect from '@/components/JournalSelect';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
+import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -89,8 +88,12 @@ export default function DividendForm({ dividendId }: { dividendId?: string }) {
                     value={field.value}
                   />
                 </FormControl>
-                <FormDescription>{t('journal-description')}</FormDescription>
-                <InputMessage form={form} field="journalId" translations={t} />
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="journalId"
+                  descriptionKey="journal-description"
+                  translations={t}
+                />
               </FormItem>
             )}
           />
@@ -104,8 +107,12 @@ export default function DividendForm({ dividendId }: { dividendId?: string }) {
                 <FormControl>
                   <Input placeholder={t('symbol-placeholder')} {...field} />
                 </FormControl>
-                <FormDescription>{t('symbol-description')}</FormDescription>
-                <InputMessage form={form} field="symbol" translations={t} />
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="symbol"
+                  descriptionKey="symbol-description"
+                  translations={t}
+                />
               </FormItem>
             )}
           />
@@ -115,15 +122,22 @@ export default function DividendForm({ dividendId }: { dividendId?: string }) {
             name="date"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>{t('date-label')}</FormLabel>
+                <FormLabel className="mb-2">{t('date-label')}</FormLabel>
 
-                <DatePicker
-                  withTime
-                  value={field.value}
-                  onSelect={field.onChange}
-                  placeholder={t('date-placeholder')}
+                <FormControl>
+                  <DatePicker
+                    withTime
+                    value={field.value}
+                    onSelect={field.onChange}
+                    placeholder={t('date-placeholder')}
+                  />
+                </FormControl>
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="date"
+                  descriptionKey="date-description"
+                  translations={t}
                 />
-                <InputMessage form={form} field="date" translations={t} />
               </FormItem>
             )}
           />
@@ -135,10 +149,16 @@ export default function DividendForm({ dividendId }: { dividendId?: string }) {
               <FormItem className="flex flex-col">
                 <FormLabel>{t('price-label')}</FormLabel>
 
-                <NumberInput {...field} />
+                <FormControl>
+                  <NumberInput {...field} />
+                </FormControl>
 
-                <FormDescription>{t('price-description')}</FormDescription>
-                <InputMessage form={form} field="price" translations={t} />
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="price"
+                  descriptionKey="price-description"
+                  translations={t}
+                />
               </FormItem>
             )}
           />
@@ -155,12 +175,10 @@ export default function DividendForm({ dividendId }: { dividendId?: string }) {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  {t('description-description')}
-                </FormDescription>
-                <InputMessage
+                <FormDescriptionOrMessage
                   form={form}
-                  field="description"
+                  fieldName="description"
+                  descriptionKey="description-description"
                   translations={t}
                 />
               </FormItem>
