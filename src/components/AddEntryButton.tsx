@@ -38,7 +38,6 @@ export default function AddEntryButton() {
             key={entryType.type}
             onClick={() => handleAddEntry(entryType.type)}
           >
-            {/* {} */}
             {React.createElement(entryType.icon, { className: 'mr-2 h-4 w-4' })}
             <span>{tEntry(entryType.type)}</span>
           </DropdownMenuItem>

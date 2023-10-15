@@ -23,12 +23,15 @@ export const columns = (
         <DataTableLink href={`/trading/entries/${row.id}`}>
           {row.original.entryType === 'TRADE'
             ? row.original.symbol
+            : row.original.entryType === 'DIVIDEND'
+            ? `${row.original.symbol} (${tTradeType(row.original.entryType)})`
             : tTradeType(row.original.entryType)}
         </DataTableLink>
       </div>
     ),
     filterFn: (row, id, value) => {
       const rowValue = row.original.symbol ?? row.original.entryType;
+
       if (!rowValue) {
         return false;
       } else {

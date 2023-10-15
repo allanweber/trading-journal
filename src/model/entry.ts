@@ -40,6 +40,7 @@ export const tradeSchema = minimalEntry.extend({
     .string({
       required_error: 'symbol-required',
     })
+    .min(1, { message: 'journal-required' })
     .max(30, {
       message: 'symbol-max',
     }),
@@ -65,6 +66,7 @@ export const dividendSchema = minimalEntry.extend({
     .string({
       required_error: 'symbol-required',
     })
+    .min(1, { message: 'journal-required' })
     .max(30, {
       message: 'symbol-max',
     }),

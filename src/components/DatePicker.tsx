@@ -69,6 +69,10 @@ export default function DatePicker(props: Props) {
 
   const handleTimeChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const time = e.target.value;
+    if (time.length < 1) {
+      return;
+    }
+
     if (!selected) {
       setTimeValue(time);
       return;
