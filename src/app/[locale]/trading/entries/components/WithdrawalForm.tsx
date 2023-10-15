@@ -2,6 +2,7 @@
 
 import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
+import FormButtonContainer from '@/components/FormButtonContainer';
 import { InputMessage } from '@/components/InputMessage';
 import JournalSelect from '@/components/JournalSelect';
 import { MessageDisplay } from '@/components/MessageDisplay';
@@ -153,14 +154,14 @@ export default function WithdrawalForm({
             )}
           />
 
-          <div className="justify-between space-x-2">
-            <Button asChild variant="outline" className="w-[200px]">
+          <FormButtonContainer>
+            <Button asChild variant="outline" className="w-full md:w-[200px]">
               <Link href="/trading/entries">{t('cancel')}</Link>
             </Button>
-            <Button type="submit" className="w-[200px]">
+            <Button type="submit" className="w-full md:w-[200px]">
               {t('save')}
             </Button>
-          </div>
+          </FormButtonContainer>
         </form>
       </Form>
     </>
