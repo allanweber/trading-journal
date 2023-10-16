@@ -1,6 +1,6 @@
 import { Direction, directions } from '@/model/direction';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import DirectionDisplay from './DirectionDisplay';
 import { Label } from './ui/label';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
@@ -31,10 +31,9 @@ export default function DirectionSelect(props: Props) {
           />
           <Label
             htmlFor={direction.direction}
-            className="flex flex-row items-center justify-evenly rounded-md border-2 border-muted bg-popover px-3 py-1.5 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary  peer-data-[state=checked]:bg-accent [&:has([data-state=checked])]:border-primary"
+            className="flex flex-row items-center justify-evenly rounded-md border-2 border-muted bg-popover px-3 py-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary  peer-data-[state=checked]:bg-accent [&:has([data-state=checked])]:border-primary"
           >
-            {React.createElement(direction.icon, { color: direction.color })}
-            {t(direction.direction)}
+            <DirectionDisplay direction={direction.direction} />
           </Label>
         </div>
       ))}

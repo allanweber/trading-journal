@@ -13,7 +13,7 @@ export enum EntryType {
   Dividend = 'DIVIDEND',
 }
 
-export const EntryTypesWithIcons = [
+export const getEntries = [
   {
     type: EntryType.Trade,
     icon: CandlestickChart,
@@ -35,3 +35,6 @@ export const EntryTypesWithIcons = [
     icon: Percent,
   },
 ];
+
+export const getEntryType = (type: EntryType) =>
+  getEntries.find((d) => d.type === type);

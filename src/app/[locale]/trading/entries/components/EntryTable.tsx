@@ -4,6 +4,8 @@ import { trpc } from '@/app/_trpc/client';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { DataTable } from '@/components/datatable/DataTable';
 import { toast } from '@/components/ui/use-toast';
+import { directions } from '@/model/direction';
+import { getEntries } from '@/model/entryType';
 import { Journal } from '@/model/journal';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -12,6 +14,7 @@ import { columns } from './columns';
 export function EntryTable({ journals }: { journals: Journal[] }) {
   const t = useTranslations('entries');
   const tTradeType = useTranslations('trade-types');
+  const tDirection = useTranslations('direction');
 
   const {
     data,
@@ -42,12 +45,12 @@ export function EntryTable({ journals }: { journals: Journal[] }) {
     deleteMutation.mutate(entryId);
   };
 
-  const tableColumns = columns(t('delete-entry'), tTradeType, onDeleteConfirm);
+  const tableColumns = columns(t('delete-entry'), onDeleteConfirm);
 
   const toolbarOptions = {
     inputFilter: {
       placeholder: t('input-filter-placeholder'),
-      columnId: 'trade',
+      columnId: 'symbol',
     },
     showViewOptions: true,
     filters: [
@@ -58,6 +61,28 @@ export function EntryTable({ journals }: { journals: Journal[] }) {
           return {
             label: journal.name,
             value: journal._id!,
+          };
+        }),
+      },
+      {
+        columnId: 'entryType',
+        title: tTradeType('title'),
+        options: getEntries.map((entryType) => {
+          return {
+            label: tTradeType(entryType.type),
+            value: entryType.type,
+            icon: entryType.icon,
+          };
+        }),
+      },
+      {
+        columnId: 'direction',
+        title: tDirection('title'),
+        options: directions.map((direction) => {
+          return {
+            label: tDirection(direction.direction),
+            value: direction.direction,
+            icon: direction.icon,
           };
         }),
       },

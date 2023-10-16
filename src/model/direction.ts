@@ -17,3 +17,6 @@ export const directions = [
     color: 'red',
   },
 ];
+
+export const getDirection = (direction: Direction) =>
+  directions.find((d) => d.direction === direction);

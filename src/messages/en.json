@@ -246,7 +246,8 @@
     "journal": "Journal",
     "price": "Price",
     "symbol": "Symbol",
-    "entryType": "Type"
+    "entryType": "Type",
+    "direction": "Direction"
   },
   "pagination": {
     "rows-count": "{count, plural, =0 {none row} =1 {1 row} other {# rows}} in total.",
@@ -270,6 +271,7 @@
     "select-type": "Add by type"
   },
   "trade-types": {
+    "title": "Entry Type",
     "TRADE": "Trade",
     "WITHDRAWAL": "Withdrawal",
     "DEPOSIT": "Deposit",
@@ -280,6 +282,7 @@
     "placeholder": "Select a journal"
   },
   "direction": {
+    "title": "Direction",
     "LONG": "Long",
     "SHORT": "Short",
     "placeholder": "Select a direction"

@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,9 +18,9 @@ import { useForm } from 'react-hook-form';
 
 import { trpc } from '@/app/_trpc/client';
 import DatePicker from '@/components/DatePicker';
-import { InputMessage } from '@/components/InputMessage';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
+import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { Journal, journalSchema } from '@/model/journal';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -86,8 +85,13 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
                 <FormControl>
                   <Input placeholder={t('name-placeholder')} {...field} />
                 </FormControl>
-                <FormDescription>{t('name-description')}</FormDescription>
-                <InputMessage form={form} field="name" translations={t} />
+
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="name"
+                  descriptionKey="name-description"
+                  translations={t}
+                />
               </FormItem>
             )}
           />
@@ -104,7 +108,13 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
                   onSelect={field.onChange}
                   placeholder={t('start-date-placeholder')}
                 />
-                <InputMessage form={form} field="startDate" translations={t} />
+
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="startDate"
+                  descriptionKey="start-date-description"
+                  translations={t}
+                />
               </FormItem>
             )}
           />
@@ -118,12 +128,10 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
 
                 <NumberInput {...field} />
 
-                <FormDescription>
-                  {t('start-balance-description')}
-                </FormDescription>
-                <InputMessage
+                <FormDescriptionOrMessage
                   form={form}
-                  field="startBalance"
+                  fieldName="startBalance"
+                  descriptionKey="start-balance-description"
                   translations={t}
                 />
               </FormItem>
@@ -141,8 +149,13 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
                   onValueChange={field.onChange}
                   value={field.value}
                 />
-                <FormDescription>{t('currency-description')}</FormDescription>
-                <InputMessage form={form} field="currency" translations={t} />
+
+                <FormDescriptionOrMessage
+                  form={form}
+                  fieldName="currency"
+                  descriptionKey="currency-description"
+                  translations={t}
+                />
               </FormItem>
             )}
           />
