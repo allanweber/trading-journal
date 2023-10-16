@@ -17,7 +17,7 @@ import { Separator } from './ui/separator';
 
 type Props = {
   onSelect: (value: Date | undefined) => void;
-  value: Date;
+  value: Date | undefined;
   withTime?: boolean;
   placeholder?: string;
   [x: string]: any;

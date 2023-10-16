@@ -35,28 +35,59 @@ const minimalEntry = z.object({
     .optional(),
 });
 
-export const tradeSchema = minimalEntry.extend({
-  symbol: z
-    .string({
-      required_error: 'symbol-required',
-    })
-    .min(1, { message: 'symbol-required' })
-    .max(30, {
-      message: 'symbol-max',
+export const tradeSchema = minimalEntry
+  .extend({
+    symbol: z
+      .string({
+        required_error: 'symbol-required',
+      })
+      .min(1, { message: 'symbol-required' })
+      .max(30, {
+        message: 'symbol-max',
+      }),
+
+    direction: z.nativeEnum(Direction, {
+      required_error: 'direction-required',
     }),
 
-  direction: z.nativeEnum(Direction, {
-    required_error: 'direction-required',
-  }),
-
-  size: z
-    .number({
-      required_error: 'size-required',
-      invalid_type_error: 'size-positive',
-    })
-    .positive({ message: 'size-positive' })
-    .max(9999999999, { message: 'size-max' }),
-});
+    size: z
+      .number({
+        required_error: 'size-required',
+        invalid_type_error: 'size-positive',
+      })
+      .positive({ message: 'size-positive' })
+      .max(9999999999, { message: 'size-max' }),
+    profit: z
+      .number()
+      .positive({ message: 'profit-positive' })
+      .max(9999999999, { message: 'profit-max' })
+      .optional(),
+    loss: z
+      .number()
+      .positive({ message: 'loss-positive' })
+      .max(9999999999, { message: 'loss-max' })
+      .optional(),
+    exitDate: z.date().optional(),
+    exitPrice: z
+      .number()
+      .positive({ message: 'exitPrice-positive' })
+      .max(9999999999, { message: 'exitPrice-max' })
+      .optional(),
+    costs: z
+      .number()
+      .positive({ message: 'costs-positive' })
+      .max(9999999999, { message: 'costs-max' })
+      .optional(),
+  })
+  .superRefine(({ date, exitDate }, context) => {
+    if (exitDate && exitDate < date) {
+      return context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'exit-date-after-date',
+        path: ['exitDate'],
+      });
+    }
+  });
 
 export const depositSchema = minimalEntry;
 export const withdrawalSchema = minimalEntry;
@@ -76,7 +107,7 @@ export const entrySchema = minimalEntry
   .extend({
     journal: journalSchema,
   })
-  .merge(tradeSchema)
+  .merge(tradeSchema as any)
   .merge(depositSchema)
   .merge(withdrawalSchema)
   .merge(taxesSchema)

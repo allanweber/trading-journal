@@ -52,7 +52,7 @@ export const NumberInput = forwardRef(function NumberInput(
   };
 
   return (
-    <div className="py-2">
+    <div className="pt-2">
       <input
         defaultValue={value}
         placeholder={placeholder || '0'}
