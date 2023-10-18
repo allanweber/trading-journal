@@ -5,7 +5,10 @@ import { TRPCClientError } from '@trpc/client';
 import { ObjectId } from 'mongodb';
 import { COLLECTION } from './entries';
 
-export async function getDeposit(userEmail: string, entryId: string) {
+export async function getDeposit(
+  userEmail: string,
+  entryId: string
+): Promise<Deposit> {
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const journal = await client
@@ -20,7 +23,10 @@ export async function getDeposit(userEmail: string, entryId: string) {
   return journal;
 }
 
-export async function saveDeposit(userEmail: string, deposit: Deposit) {
+export async function saveDeposit(
+  userEmail: string,
+  deposit: Deposit
+): Promise<Deposit> {
   const parse = depositSchema.safeParse(deposit);
   if (!parse.success) {
     throw new TRPCClientError(parse.error.message);

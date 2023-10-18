@@ -7,6 +7,7 @@ import FormButtonContainer from '@/components/FormButtonContainer';
 import JournalSelect from '@/components/JournalSelect';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
+import { TextArea } from '@/components/TextArea';
 import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,7 +19,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import { Trade, tradeSchema } from '@/model/entry';
 import { EntryType } from '@/model/entryType';
@@ -29,11 +29,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function TradeForm({
-  depositId: tradeId,
-}: {
-  depositId?: string;
-}) {
+export default function TradeForm({ tradeId }: { tradeId?: string }) {
   const t = useTranslations('trade-form');
   const router = useRouter();
   const locale = useLocale();
@@ -381,7 +377,7 @@ export default function TradeForm({
                     <FormItem>
                       <FormLabel>{t('description-label')}</FormLabel>
                       <FormControl>
-                        <Textarea
+                        <TextArea
                           placeholder={t('description-placeholder')}
                           {...field}
                         />

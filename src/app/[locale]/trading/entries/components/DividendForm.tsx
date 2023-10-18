@@ -6,6 +6,7 @@ import FormButtonContainer from '@/components/FormButtonContainer';
 import JournalSelect from '@/components/JournalSelect';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
+import { TextArea } from '@/components/TextArea';
 import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,7 +17,6 @@ import {
   FormLabel,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import { Dividend, dividendSchema } from '@/model/entry';
 import { EntryType } from '@/model/entryType';
@@ -170,7 +170,7 @@ export default function DividendForm({ dividendId }: { dividendId?: string }) {
               <FormItem>
                 <FormLabel>{t('description-label')}</FormLabel>
                 <FormControl>
-                  <Textarea
+                  <TextArea
                     placeholder={t('description-placeholder')}
                     {...field}
                   />

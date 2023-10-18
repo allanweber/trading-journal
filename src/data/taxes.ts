@@ -5,7 +5,10 @@ import { TRPCClientError } from '@trpc/client';
 import { ObjectId } from 'mongodb';
 import { COLLECTION } from './entries';
 
-export async function getTaxes(userEmail: string, entryId: string) {
+export async function getTaxes(
+  userEmail: string,
+  entryId: string
+): Promise<Taxes> {
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const journal = await client
@@ -20,7 +23,10 @@ export async function getTaxes(userEmail: string, entryId: string) {
   return journal;
 }
 
-export async function saveTaxes(userEmail: string, taxes: Taxes) {
+export async function saveTaxes(
+  userEmail: string,
+  taxes: Taxes
+): Promise<Taxes> {
   const parse = taxesSchema.safeParse(taxes);
   if (!parse.success) {
     throw new TRPCClientError(parse.error.message);

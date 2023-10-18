@@ -14,14 +14,17 @@ const defaultOptions: CurrencyFormatterOptions = {
   symbol: '$',
 };
 
-export const currencyFormatter = (value: number, currency: string) => {
+export const currencyFormatter = (
+  value: number | undefined,
+  currency: string
+) => {
   const options = { ...defaultOptions, symbol: getSymbol(currency) };
   const formatted = numberFormat(value, options);
 
   return `${options.symbol} ${formatted}`;
 };
 
-export const percentFormatter = (value: number) => {
+export const percentFormatter = (value: number | undefined) => {
   let valueFormatted;
   if (value) {
     valueFormatted = numberFormat(value * 100, defaultOptions);
@@ -31,12 +34,12 @@ export const percentFormatter = (value: number) => {
   return `${valueFormatted} %`;
 };
 
-export const numberFormatter = (value: number) => {
+export const numberFormatter = (value: number | undefined) => {
   return numberFormat(value, defaultOptions);
 };
 
 export const numberFormat = (
-  value: number,
+  value: number | undefined,
   options: CurrencyFormatterOptions
 ) => {
   if (value === undefined) {

@@ -55,16 +55,6 @@ export function EntryTable({ journals }: { journals: Journal[] }) {
     showViewOptions: true,
     filters: [
       {
-        columnId: 'journal',
-        title: t('journal-filter'),
-        options: journals.map((journal) => {
-          return {
-            label: journal.name,
-            value: journal._id!,
-          };
-        }),
-      },
-      {
         columnId: 'entryType',
         title: tTradeType('title'),
         options: getEntries.map((entryType) => {
@@ -72,6 +62,16 @@ export function EntryTable({ journals }: { journals: Journal[] }) {
             label: tTradeType(entryType.type),
             value: entryType.type,
             icon: entryType.icon,
+          };
+        }),
+      },
+      {
+        columnId: 'journal',
+        title: t('journal-filter'),
+        options: journals.map((journal) => {
+          return {
+            label: journal.name,
+            value: journal._id!,
           };
         }),
       },

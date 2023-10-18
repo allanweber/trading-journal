@@ -28,7 +28,7 @@ import { DataTablePagination } from './DataTablePagination';
 import { DataTableToolbar, ToolbarOptions } from './DataTableToolbar';
 
 import { useState } from 'react';
-import { Skeleton } from '../ui/skeleton';
+import Loading from '../Loading';
 
 interface DataTableProps<TData extends { _id?: string }, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -104,11 +104,7 @@ export function DataTable<TData extends { _id?: string }, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-4 w-3/4" />
-                    <Skeleton className="h-4 w-full" />
-                  </div>
+                  <Loading />
                 </TableCell>
               </TableRow>
             ) : table.getRowModel().rows?.length ? (

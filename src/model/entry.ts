@@ -32,7 +32,7 @@ const minimalEntry = z.object({
     .max(100, {
       message: 'description-max',
     })
-    .optional(),
+    .nullish(),
 });
 
 export const tradeSchema = minimalEntry
@@ -61,23 +61,23 @@ export const tradeSchema = minimalEntry
       .number()
       .positive({ message: 'profit-positive' })
       .max(9999999999, { message: 'profit-max' })
-      .optional(),
+      .nullish(),
     loss: z
       .number()
       .positive({ message: 'loss-positive' })
       .max(9999999999, { message: 'loss-max' })
-      .optional(),
-    exitDate: z.date().optional(),
+      .nullish(),
+    exitDate: z.date().nullish(),
     exitPrice: z
       .number()
       .positive({ message: 'exitPrice-positive' })
       .max(9999999999, { message: 'exitPrice-max' })
-      .optional(),
+      .nullish(),
     costs: z
       .number()
       .positive({ message: 'costs-positive' })
       .max(9999999999, { message: 'costs-max' })
-      .optional(),
+      .nullish(),
   })
   .superRefine(({ date, exitDate }, context) => {
     if (exitDate && exitDate < date) {

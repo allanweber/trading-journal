@@ -5,7 +5,7 @@ import {
 } from '@/lib/number';
 
 type Props = {
-  value: number;
+  value: number | undefined;
   currency?: string;
   isPercentage?: boolean;
 };

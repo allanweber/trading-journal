@@ -5,7 +5,10 @@ import { TRPCClientError } from '@trpc/client';
 import { ObjectId } from 'mongodb';
 import { COLLECTION } from './entries';
 
-export async function getWithdrawal(userEmail: string, entryId: string) {
+export async function getWithdrawal(
+  userEmail: string,
+  entryId: string
+): Promise<Withdrawal> {
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const journal = await client
@@ -23,12 +26,11 @@ export async function getWithdrawal(userEmail: string, entryId: string) {
 export async function saveWithdrawal(
   userEmail: string,
   withdrawal: Withdrawal
-) {
+): Promise<Withdrawal> {
   const parse = withdrawalSchema.safeParse(withdrawal);
   if (!parse.success) {
     throw new TRPCClientError(parse.error.message);
   }
-
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const { _id, ...record } = withdrawal;

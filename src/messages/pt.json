@@ -298,7 +298,7 @@
     "select-type": "Adicione por tipo"
   },
   "trade-types": {
-    "title": "Type",
+    "title": "Tipo",
     "TRADE": "Trade",
     "WITHDRAWAL": "Saque",
     "DEPOSIT": "Depósito",

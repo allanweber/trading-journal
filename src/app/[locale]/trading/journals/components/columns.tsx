@@ -9,7 +9,7 @@ import { DataTableColumnHeader } from '@/components/datatable/DataTableColumnHea
 import DataTableLink from '@/components/datatable/DataTableLink';
 import { getSymbol } from '@/model/currency';
 import { Journal } from '@/model/journal';
-import { TrashIcon } from 'lucide-react';
+import { EditIcon, TrashIcon } from 'lucide-react';
 
 export const columns = (
   actionsTitle: string,
@@ -70,12 +70,18 @@ export const columns = (
   {
     id: 'actions',
     cell: ({ row }) => (
-      <ActionConfirmation
-        actionTitle={actionsTitle}
-        onConfirm={() => onDeleteConfirm(row.id)}
-      >
-        <TrashIcon className="h-4 w-4" />
-      </ActionConfirmation>
+      <div className="max-w-[45px] flex justify-between">
+        <DataTableLink href={`/trading/journals/${row.id}`}>
+          <EditIcon className="h-5 w-5" />
+        </DataTableLink>
+
+        <ActionConfirmation
+          actionTitle={actionsTitle}
+          onConfirm={() => onDeleteConfirm(row.id)}
+        >
+          <TrashIcon className="h-4 w-4" />
+        </ActionConfirmation>
+      </div>
     ),
   },
 ];

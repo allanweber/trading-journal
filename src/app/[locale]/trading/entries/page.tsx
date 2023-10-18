@@ -2,21 +2,15 @@
 
 import { trpc } from '@/app/_trpc/client';
 import AddEntryButton from '@/components/AddEntryButton';
+import Loading from '@/components/Loading';
 import { Action, PageHeader, Subtitle, Title } from '@/components/PageHeader';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { EntryTable } from './components/EntryTable';
 
 function LoadingJournals() {
-  return (
-    <div className="space-y-2">
-      <Skeleton className="h-4 w-1/2" />
-      <Skeleton className="h-4 w-3/4" />
-      <Skeleton className="h-4 w-full" />
-    </div>
-  );
+  return <Loading />;
 }
 
 function PageAction({

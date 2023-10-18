@@ -6,7 +6,7 @@ import { ObjectId } from 'mongodb';
 
 const COLLECTION = 'journals';
 
-export async function getJournals(userEmail: string) {
+export async function getJournals(userEmail: string): Promise<Journal[]> {
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const journals = await client
@@ -17,7 +17,10 @@ export async function getJournals(userEmail: string) {
   return journals;
 }
 
-export async function getJournal(userEmail: string, journalId: string) {
+export async function getJournal(
+  userEmail: string,
+  journalId: string
+): Promise<Journal> {
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const journal = await client
@@ -32,7 +35,10 @@ export async function getJournal(userEmail: string, journalId: string) {
   return journal;
 }
 
-export async function saveJournal(userEmail: string, journal: Journal) {
+export async function saveJournal(
+  userEmail: string,
+  journal: Journal
+): Promise<Journal> {
   const parse = journalSchema.safeParse(journal);
   if (!parse.success) {
     throw new TRPCClientError(parse.error.message);
@@ -53,7 +59,10 @@ export async function saveJournal(userEmail: string, journal: Journal) {
   return result;
 }
 
-export async function deleteJournal(userEmail: string, journalId: string) {
+export async function deleteJournal(
+  userEmail: string,
+  journalId: string
+): Promise<any> {
   const client = await mongoClient;
   const dbName = getDbName(userEmail);
   const result = await client

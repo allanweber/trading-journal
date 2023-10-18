@@ -17,7 +17,7 @@ import { Separator } from './ui/separator';
 
 type Props = {
   onSelect: (value: Date | undefined) => void;
-  value: Date | undefined;
+  value: Date | undefined | null;
   withTime?: boolean;
   placeholder?: string;
   [x: string]: any;
@@ -29,13 +29,20 @@ export default function DatePicker(props: Props) {
   const t = useTranslations('date-picker');
   const calendarLocale = locale === 'en' ? enGB : ptBR;
 
-  const [selected, setSelected] = useState<Date | undefined>(value);
+  const [selected, setSelected] = useState<Date | undefined>(
+    value === null ? undefined : value
+  );
   const [month, setMonth] = useState<Date>(value ?? new Date());
   const [timeValue, setTimeValue] = useState<string>(
     value && withTime ? `${value.getHours()}:${value.getMinutes()}` : '00:00'
   );
 
   useEffect(() => {
+    if (value === null) {
+      setSelected(undefined);
+      setTimeValue('00:00');
+      return;
+    }
     setSelected(value);
   }, [value]);
 

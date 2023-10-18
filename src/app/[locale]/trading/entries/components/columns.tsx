@@ -10,7 +10,7 @@ import NumberDisplay from '@/components/NumberDisplay';
 import { DataTableColumnHeader } from '@/components/datatable/DataTableColumnHeader';
 import DataTableLink from '@/components/datatable/DataTableLink';
 import { Entry } from '@/model/entry';
-import { TrashIcon } from 'lucide-react';
+import { EditIcon, TrashIcon } from 'lucide-react';
 
 export const columns = (
   actionsTitle: string,
@@ -25,7 +25,7 @@ export const columns = (
           {row.original.entryType === 'TRADE' ||
           row.original.entryType === 'DIVIDEND'
             ? row.getValue('symbol')
-            : '-'}
+            : null}
         </DataTableLink>
       </div>
     ),
@@ -42,18 +42,6 @@ export const columns = (
     enableHiding: false,
   },
   {
-    accessorKey: 'journal',
-    header: ({ column }) => <DataTableColumnHeader column={column} />,
-    cell: ({ row }) => (
-      <div className="w-auto">{row.original.journal.name}</div>
-    ),
-    filterFn: (row, id, value) => {
-      return value.includes(row.original.journal._id);
-    },
-    enableSorting: true,
-    enableHiding: true,
-  },
-  {
     accessorKey: 'entryType',
     header: ({ column }) => <DataTableColumnHeader column={column} />,
     cell: ({ row }) => (
@@ -63,6 +51,18 @@ export const columns = (
     ),
     filterFn: (row, id, value) => {
       return value.includes(row.getValue('entryType'));
+    },
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
+    accessorKey: 'journal',
+    header: ({ column }) => <DataTableColumnHeader column={column} />,
+    cell: ({ row }) => (
+      <div className="w-auto">{row.original.journal.name}</div>
+    ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.original.journal._id);
     },
     enableSorting: true,
     enableHiding: true,
@@ -109,12 +109,18 @@ export const columns = (
   {
     id: 'actions',
     cell: ({ row }) => (
-      <ActionConfirmation
-        actionTitle={actionsTitle}
-        onConfirm={() => onDeleteConfirm(row.id)}
-      >
-        <TrashIcon className="h-4 w-4" />
-      </ActionConfirmation>
+      <div className="max-w-[45px] flex justify-between">
+        <DataTableLink href={`/trading/entries/${row.id}`}>
+          <EditIcon className="h-5 w-5" />
+        </DataTableLink>
+
+        <ActionConfirmation
+          actionTitle={actionsTitle}
+          onConfirm={() => onDeleteConfirm(row.id)}
+        >
+          <TrashIcon className="h-5 w-5" />
+        </ActionConfirmation>
+      </div>
     ),
   },
 ];

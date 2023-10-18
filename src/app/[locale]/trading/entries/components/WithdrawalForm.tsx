@@ -6,6 +6,7 @@ import FormButtonContainer from '@/components/FormButtonContainer';
 import JournalSelect from '@/components/JournalSelect';
 import { MessageDisplay } from '@/components/MessageDisplay';
 import { NumberInput } from '@/components/NumberInput';
+import { TextArea } from '@/components/TextArea';
 import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,7 +16,6 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import { Withdrawal, withdrawalSchema } from '@/model/entry';
 import { EntryType } from '@/model/entryType';
@@ -153,7 +153,7 @@ export default function WithdrawalForm({
               <FormItem>
                 <FormLabel>{t('description-label')}</FormLabel>
                 <FormControl>
-                  <Textarea
+                  <TextArea
                     placeholder={t('description-placeholder')}
                     {...field}
                   />
