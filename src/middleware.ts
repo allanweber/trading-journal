@@ -1,21 +1,9 @@
 import { authMiddleware } from '@clerk/nextjs';
-import createIntlMiddleware from 'next-intl/middleware';
 
-const locales = ['en', 'pt'];
-
-const intlMiddleware = createIntlMiddleware({
-  locales,
-  defaultLocale: 'en',
-  localePrefix: 'always',
-});
-
-export default authMiddleware({
-  beforeAuth: (req) => {
-    return intlMiddleware(req);
-  },
-
-  publicRoutes: ['/:locale/sign-in', '/:locale/sign-up'],
-});
+// This example protects all routes including api/trpc routes
+// Please edit this to allow other routes to be public as needed.
+// See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
+export default authMiddleware({});
 
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],

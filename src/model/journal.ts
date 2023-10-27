@@ -4,26 +4,28 @@ export const journalSchema = z.object({
   _id: z.string().optional(),
   name: z
     .string({
-      required_error: 'name-required',
+      required_error: 'Journal Name is required',
     })
     .min(5, {
-      message: 'name-min',
+      message: 'Journal Name must be at least 5 characters long',
     })
     .max(30, {
-      message: 'name-max',
+      message: 'Journal Name must be at most 30 characters long',
     }),
   startDate: z.date({
-    required_error: 'start-date-required',
+    required_error: 'Start Date is required',
   }),
   startBalance: z
     .number({
-      required_error: 'start-balance-required',
-      invalid_type_error: 'start-balance-positive',
+      required_error: 'Start Balance is required',
+      invalid_type_error: 'Start Balance must be a number',
     })
-    .positive({ message: 'start-balance-positive' })
-    .max(9999999999, { message: 'start-balance-max' }),
+    .positive({ message: 'Start balance must be greater than 0' })
+    .max(9999999999, {
+      message: 'Start balance must be less than 10000000000',
+    }),
   currency: z.string({
-    required_error: 'currency-required',
+    required_error: 'Currency is required',
   }),
 });
 

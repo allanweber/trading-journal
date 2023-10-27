@@ -1,33 +1,25 @@
+import { currentUser } from '@clerk/nextjs/server';
 import { TRPCError, initTRPC } from '@trpc/server';
 import superjson from 'superjson';
-import { Context } from './context';
 
-const t = initTRPC.context<Context>().create({ transformer: superjson });
+const t = initTRPC.create({
+  transformer: superjson,
+  errorFormatter({ shape }) {
+    return shape;
+  },
+});
 const middleware = t.middleware;
 
-// const isAuth = middleware(async (opts) => {
-//   const session = await getServerSession(authOptions);
+const isAuth = middleware(async (opts) => {
+  const user = await currentUser();
 
-//   if (!session || !session.user) {
-//     throw new TRPCError({ code: 'UNAUTHORIZED' });
-//   }
-
-//   return opts.next({
-//     ctx: {
-//       userEmail: session.user.email!,
-//       session,
-//     },
-//   });
-// });
-
-const isAuth = t.middleware(({ next, ctx }) => {
-  if (!ctx.auth.userId) {
+  if (!user || user.emailAddresses.length < 1) {
     throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
-  return next({
+
+  return opts.next({
     ctx: {
-      //TODO find a wai to get email
-      userEmail: ctx.auth.user?.username,
+      userEmail: user.emailAddresses[0].emailAddress,
     },
   });
 });

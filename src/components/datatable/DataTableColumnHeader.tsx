@@ -8,7 +8,6 @@ import { Column } from '@tanstack/react-table';
 
 import { cn } from '@/lib/utils';
 
-import { useTranslations } from 'next-intl';
 import { Button } from '../ui/button';
 import {
   DropdownMenu,
@@ -21,7 +20,7 @@ import {
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
-  title?: string;
+  title: string;
 }
 
 export function DataTableColumnHeader<TData, TValue>({
@@ -29,12 +28,8 @@ export function DataTableColumnHeader<TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
-  const t = useTranslations('table-columns');
-
-  const label = title ? title : t(column.id);
-
   if (!column.getCanSort()) {
-    return <div className={cn(className)}>{label}</div>;
+    return <div className={cn(className)}>{title}</div>;
   }
 
   return (
@@ -46,7 +41,7 @@ export function DataTableColumnHeader<TData, TValue>({
             size="sm"
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
-            <span>{label}</span>
+            <span>{title}</span>
             {column.getIsSorted() === 'desc' ? (
               <ArrowDownIcon className="ml-2 h-4 w-4" />
             ) : column.getIsSorted() === 'asc' ? (

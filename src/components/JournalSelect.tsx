@@ -3,7 +3,6 @@
 import { trpc } from '@/app/_trpc/client';
 import { getSymbol } from '@/model/currency';
 import { Journal } from '@/model/journal';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { FormControl } from './ui/form';
 import {
@@ -22,7 +21,6 @@ type Props = {
 
 export default function JournalSelect(props: Props) {
   const { onValueChange, value, ...rest } = props;
-  const t = useTranslations('journal-select');
 
   const [journals, setJournals] = useState<Journal[]>([]);
 
@@ -45,7 +43,7 @@ export default function JournalSelect(props: Props) {
     <Select onValueChange={handleChange} value={value} {...rest}>
       <FormControl>
         <SelectTrigger>
-          <SelectValue placeholder={t('placeholder')} />
+          <SelectValue placeholder="Select a journal" />
         </SelectTrigger>
       </FormControl>
       <SelectContent>

@@ -7,30 +7,30 @@ const minimalEntry = z.object({
   _id: z.string().optional(),
   journalId: z
     .string({
-      required_error: 'journal-required',
+      required_error: 'Journal is required',
     })
-    .min(1, { message: 'journal-required' }),
+    .min(1, { message: 'Journal is required' }),
 
   date: z.date({
-    required_error: 'date-required',
+    required_error: 'Date is required',
   }),
 
   price: z
     .number({
-      required_error: 'price-required',
-      invalid_type_error: 'price-positive',
+      required_error: 'Price is required',
+      invalid_type_error: 'Price must be a number',
     })
-    .positive({ message: 'price-positive' })
-    .max(9999999999, { message: 'price-max' }),
+    .positive({ message: 'Price must be greater than 0' })
+    .max(9999999999, { message: 'Price must be less than 10000000000' }),
 
   entryType: z.nativeEnum(EntryType, {
-    required_error: 'entry-type-required',
+    required_error: 'Entry Type is required',
   }),
 
   description: z
     .string()
     .max(100, {
-      message: 'description-max',
+      message: 'Description must be at most 100 characters long',
     })
     .nullish(),
 });
@@ -43,47 +43,47 @@ export const tradeSchema = minimalEntry
       })
       .min(1, { message: 'symbol-required' })
       .max(30, {
-        message: 'symbol-max',
+        message: 'Symbol must be at most 30 characters long',
       }),
 
     direction: z.nativeEnum(Direction, {
-      required_error: 'direction-required',
+      required_error: 'Direction is required',
     }),
 
     size: z
       .number({
-        required_error: 'size-required',
-        invalid_type_error: 'size-positive',
+        required_error: 'Size is required',
+        invalid_type_error: 'Size must be a number',
       })
-      .positive({ message: 'size-positive' })
-      .max(9999999999, { message: 'size-max' }),
+      .positive({ message: 'Size must be greater than 0' })
+      .max(999999, { message: 'Size must be less than 1000000' }),
     profit: z
       .number()
-      .positive({ message: 'profit-positive' })
-      .max(9999999999, { message: 'profit-max' })
+      .positive({ message: 'Profit must be greater than 0' })
+      .max(9999999999, { message: 'Profit must be less than 10000000000' })
       .nullish(),
     loss: z
       .number()
-      .positive({ message: 'loss-positive' })
-      .max(9999999999, { message: 'loss-max' })
+      .positive({ message: 'Loss must be greater than 0' })
+      .max(9999999999, { message: 'Loss must be less than 10000000000' })
       .nullish(),
     exitDate: z.date().nullish(),
     exitPrice: z
       .number()
-      .positive({ message: 'exitPrice-positive' })
-      .max(9999999999, { message: 'exitPrice-max' })
+      .positive({ message: 'Exit Price must be greater than 0' })
+      .max(9999999999, { message: 'Exit Price must be less than 10000000000' })
       .nullish(),
     costs: z
       .number()
-      .positive({ message: 'costs-positive' })
-      .max(9999999999, { message: 'costs-max' })
+      .positive({ message: 'Costs must be greater than 0' })
+      .max(9999999999, { message: 'Costs must be less than 10000000000' })
       .nullish(),
   })
   .superRefine(({ date, exitDate }, context) => {
     if (exitDate && exitDate < date) {
       return context.addIssue({
         code: z.ZodIssueCode.custom,
-        message: 'exit-date-after-date',
+        message: 'Exit Date must be after Date',
         path: ['exitDate'],
       });
     }
@@ -95,11 +95,11 @@ export const taxesSchema = minimalEntry;
 export const dividendSchema = minimalEntry.extend({
   symbol: z
     .string({
-      required_error: 'symbol-required',
+      required_error: 'Symbol is required',
     })
-    .min(1, { message: 'symbol-required' })
+    .min(1, { message: 'Symbol is required' })
     .max(30, {
-      message: 'symbol-max',
+      message: 'Symbol must be at most 30 characters long',
     }),
 });
 

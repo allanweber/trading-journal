@@ -7,9 +7,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { enGB, ptBR } from 'date-fns/locale';
+import { enGB } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
 
 import { useEffect, useState } from 'react';
 import DateDisplay from './DateDisplay';
@@ -25,9 +24,6 @@ type Props = {
 
 export default function DatePicker(props: Props) {
   const { onSelect, value, withTime, placeholder, ...rest } = props;
-  const locale = useLocale();
-  const t = useTranslations('date-picker');
-  const calendarLocale = locale === 'en' ? enGB : ptBR;
 
   const [selected, setSelected] = useState<Date | undefined>(
     value === null ? undefined : value
@@ -137,7 +133,7 @@ export default function DatePicker(props: Props) {
             {selected ? (
               <DateDisplay value={selected} withTime={withTime} />
             ) : (
-              <span>{placeholder ?? t('placeholder')}</span>
+              <span>Select a date</span>
             )}
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
@@ -148,7 +144,7 @@ export default function DatePicker(props: Props) {
           mode="single"
           selected={selected}
           onSelect={handleDaySelect}
-          locale={calendarLocale}
+          locale={enGB}
           defaultMonth={selected ?? new Date()}
           onMonthChange={setMonth}
           month={month}
@@ -165,7 +161,7 @@ export default function DatePicker(props: Props) {
                       onChange={handleTimeChange}
                     />
                     <Button variant="outline" size="sm" onClick={nowClick}>
-                      {t('now')}
+                      Now
                     </Button>
                   </div>
                 </>
@@ -173,7 +169,7 @@ export default function DatePicker(props: Props) {
               <Separator className="mb-2 mt-2" />
               <div className="flex justify-center">
                 <Button size="sm" className="w-full" onClick={todayClick}>
-                  {t('today')}
+                  Today
                 </Button>
                 <Button
                   size="sm"
@@ -181,7 +177,7 @@ export default function DatePicker(props: Props) {
                   className="w-full ml-2"
                   onClick={clearClick}
                 >
-                  {t('clear')}
+                  Clear
                 </Button>
               </div>
             </div>

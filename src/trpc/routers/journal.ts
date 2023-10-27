@@ -10,6 +10,7 @@ import { privateProcedure, router } from '../trpc';
 
 export const journalRouter = router({
   list: privateProcedure.query(async ({ ctx }) => {
+    console.log('ctx', ctx);
     const { userEmail } = ctx;
     return await getJournals(userEmail);
   }),

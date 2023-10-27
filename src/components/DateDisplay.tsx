@@ -1,6 +1,5 @@
 import { format } from 'date-fns';
-import { enGB, ptBR } from 'date-fns/locale';
-import { useLocale } from 'next-intl';
+import { enGB } from 'date-fns/locale';
 
 const withTimeFormat = 'PPP hh:mm b';
 const dateFormat = 'PPP';
@@ -12,8 +11,6 @@ type Props = {
 
 export default function DateDisplay(props: Props) {
   const { value, withTime } = props;
-  const locale = useLocale();
-  const calendarLocale = locale === 'en' ? enGB : ptBR;
   const fieldFormat = withTime ? withTimeFormat : dateFormat;
 
   if (!value) return null;
@@ -24,5 +21,5 @@ export default function DateDisplay(props: Props) {
   } else {
     date = value;
   }
-  return format(date, fieldFormat, { locale: calendarLocale });
+  return format(date, fieldFormat, { locale: enGB });
 }

@@ -15,7 +15,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { useTranslations } from 'next-intl';
 import {
   Table,
   TableBody,
@@ -43,7 +42,6 @@ export function DataTable<TData extends { _id?: string }, TValue>({
   toolbarOptions,
   isLoading,
 }: DataTableProps<TData, TValue>) {
-  const t = useTranslations('data-table');
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -129,7 +127,7 @@ export function DataTable<TData extends { _id?: string }, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {t('no-results')}
+                  No results found
                 </TableCell>
               </TableRow>
             )}

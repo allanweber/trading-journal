@@ -1,5 +1,4 @@
 import { Direction, directions } from '@/model/direction';
-import { useTranslations } from 'next-intl';
 import DirectionDisplay from './DirectionDisplay';
 import { Label } from './ui/label';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
@@ -11,7 +10,6 @@ type Props = {
 };
 
 export default function DirectionSelect(props: Props) {
-  const t = useTranslations('direction');
   const { onValueChange, value: defaultValue, ...rest } = props;
 
   return (

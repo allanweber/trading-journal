@@ -4,7 +4,6 @@ import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { MixerHorizontalIcon } from '@radix-ui/react-icons';
 import { Table } from '@tanstack/react-table';
 
-import { useTranslations } from 'next-intl';
 import { Button } from '../ui/button';
 import {
   DropdownMenu,
@@ -21,7 +20,6 @@ interface DataTableViewOptionsProps<TData> {
 export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
-  const t = useTranslations('table-columns');
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -35,7 +33,7 @@ export function DataTableViewOptions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
-        <DropdownMenuLabel>{t('toggle-columns')}</DropdownMenuLabel>
+        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
@@ -51,7 +49,7 @@ export function DataTableViewOptions<TData>({
                 checked={column.getIsVisible()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {t(column.id)}
+                {column.id}
               </DropdownMenuCheckboxItem>
             );
           })}
