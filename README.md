@@ -33,3 +33,7 @@ pnpm dev
 ### Postgres
 
 ```docker run -d --name postgres -e POSTGRES_PASSWORD=trading-journal -e POSTGRES_USER=trading-journal -e POSTGRES_DB=trading-journal -p 5432:5432 postgres```
+
+## MogoDB
+
+```docker run -d --name trading-journal -p 27017:27017 mongo```

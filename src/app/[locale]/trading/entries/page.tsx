@@ -4,9 +4,8 @@ import { trpc } from '@/app/_trpc/client';
 import AddEntryButton from '@/components/AddEntryButton';
 import Loading from '@/components/Loading';
 import { Action, PageHeader, Subtitle, Title } from '@/components/PageHeader';
-import { Button } from '@/components/ui/button';
-import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next/link';
+import CreateJournal from '@/components/journals/CreateJournal';
+import { useTranslations } from 'next-intl';
 import { EntryTable } from './components/EntryTable';
 
 function LoadingJournals() {
@@ -22,14 +21,9 @@ function PageAction({
   hasJournals: boolean;
   addJournalTitle: string;
 }) {
-  const locale = useLocale();
   if (loading) return null;
   if (hasJournals) return <AddEntryButton />;
-  return (
-    <Button asChild>
-      <Link href={`/${locale}/trading/journals/new`}>{addJournalTitle}</Link>
-    </Button>
-  );
+  return <CreateJournal />;
 }
 
 export default function Entries() {

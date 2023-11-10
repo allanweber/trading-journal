@@ -1,5 +1,5 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, getServerSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { prismaInstance } from './prisma';
 
@@ -21,3 +21,13 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
 };
+
+export async function userEmail(): Promise<string> {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    return Promise.reject(new Error('Unauthorized'));
+  }
+
+  return Promise.resolve(session.user.email!);
+}
