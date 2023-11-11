@@ -1,5 +1,5 @@
 import { currencies } from '@/model/currency';
-import Search from '../Search';
+import Search from '../table/Search';
 
 export default function JournalSearch() {
   const filters = [

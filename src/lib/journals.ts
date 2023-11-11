@@ -9,11 +9,14 @@ const COLLECTION = 'journals';
 export async function getJournals(
   term?: string,
   currencies?: string[],
-  pageSize: number = 10
+  pageSize: number = 10,
+  pageNumber: number = 1
 ): Promise<Paginated<Journal>> {
   const email = await userEmail();
   const client = await mongoClient;
   const dbName = getDbName(email);
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   let query = {};
   if (term) {
@@ -23,8 +26,6 @@ export async function getJournals(
   if (currencies && currencies.length > 0) {
     query = { ...query, currency: { $in: currencies } };
   }
-
-  const pageNumber = 1;
 
   const [
     {

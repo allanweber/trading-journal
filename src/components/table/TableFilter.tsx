@@ -6,8 +6,8 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
 import {
   Command,
   CommandEmpty,
@@ -16,9 +16,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from './ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { Separator } from './ui/separator';
+} from '../ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Separator } from '../ui/separator';
 
 export interface FilterOptions {
   filterId: string;
@@ -50,9 +50,10 @@ export function TableFilter(props: FilterOptions) {
     } else {
       setSelectedValues(() => new Set());
     }
-  }, [searchParams]);
+  }, [searchParams, filterId]);
 
-  useEffect(() => {
+  const selectChanges = () => {
+    console.log('selectChanges', selectedValues);
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');
     if (selectedValues.size > 0) {
@@ -60,8 +61,20 @@ export function TableFilter(props: FilterOptions) {
     } else {
       params.delete(filterId);
     }
+    updatePath(params);
+  };
+
+  const reset = () => {
+    setSelectedValues(() => new Set());
+    const params = new URLSearchParams(searchParams);
+    params.set('page', '1');
+    params.delete(filterId);
+    updatePath(params);
+  };
+
+  const updatePath = (params: URLSearchParams) => {
     replace(`${pathname}?${params.toString()}`);
-  }, [selectedValues]);
+  };
 
   return (
     <Popover>
@@ -126,6 +139,7 @@ export function TableFilter(props: FilterOptions) {
                           (prev) => new Set(prev.add(option.value))
                         );
                       }
+                      return selectChanges();
                     }}
                   >
                     <div
@@ -151,11 +165,7 @@ export function TableFilter(props: FilterOptions) {
                 <CommandSeparator />
                 <CommandGroup>
                   <CommandItem
-                    onSelect={() =>
-                      setSelectedValues(() => {
-                        return new Set();
-                      })
-                    }
+                    onSelect={() => reset()}
                     className="justify-center text-center"
                   >
                     Clear filters

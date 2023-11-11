@@ -14,3 +14,10 @@ export class Paginated<T> {
     this.totalPages = Math.ceil(total / pageSize);
   }
 }
+
+export interface PaginatedParams {
+  pageSize: number;
+  page: number;
+  total: number;
+  totalPages: number;
+}

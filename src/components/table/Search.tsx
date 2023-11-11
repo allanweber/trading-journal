@@ -4,9 +4,9 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Ref, useEffect, useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import { FilterOptions, TableFilter } from './TableFilter';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
 
 type Props = {
   placeholder: string;
@@ -32,10 +32,11 @@ export default function Search(props: Props) {
         setFiltering(true);
       }
     });
-  }, [searchParams]);
+  }, [searchParams, filters]);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
+    params.set('page', '1');
     if (term) {
       setFiltering(true);
       params.set('query', term);
@@ -47,6 +48,7 @@ export default function Search(props: Props) {
 
   const reset = () => {
     const params = new URLSearchParams(searchParams);
+    params.set('page', '1');
     params.delete('query');
     if (inputRef.current) {
       inputRef.current.value = '';
@@ -59,7 +61,6 @@ export default function Search(props: Props) {
   };
 
   const updatePath = (params: URLSearchParams) => {
-    params.set('page', '1');
     replace(`${pathname}?${params.toString()}`);
   };
 

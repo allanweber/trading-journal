@@ -50,7 +50,6 @@ export default function DatePicker(props: Props) {
     const today = new Date();
     setMonth(today);
     if (withTime) {
-      console.log(today.getHours(), today.getMinutes());
       setTimeValue(`${today.getHours()}:${today.getMinutes()}`);
     }
     setSelected(today);
