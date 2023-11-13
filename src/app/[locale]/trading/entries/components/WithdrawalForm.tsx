@@ -21,7 +21,6 @@ import { Withdrawal, withdrawalSchema } from '@/model/entry';
 import { EntryType } from '@/model/entryType';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -169,8 +168,13 @@ export default function WithdrawalForm({
           />
 
           <FormButtonContainer>
-            <Button asChild variant="outline" className="w-full md:w-[200px]">
-              <Link href="/trading/entries">{t('cancel')}</Link>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full md:w-[200px]"
+              onClick={() => router.back()}
+            >
+              {t('cancel')}
             </Button>
             <Button type="submit" className="w-full md:w-[200px]">
               {t('save')}

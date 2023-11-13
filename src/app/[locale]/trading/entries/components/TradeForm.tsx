@@ -24,7 +24,6 @@ import { Trade, tradeSchema } from '@/model/entry';
 import { EntryType } from '@/model/entryType';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -395,11 +394,12 @@ export default function TradeForm({ tradeId }: { tradeId?: string }) {
 
               <FormButtonContainer>
                 <Button
-                  asChild
+                  type="button"
                   variant="outline"
                   className="w-full md:w-[200px]"
+                  onClick={() => router.back()}
                 >
-                  <Link href="/trading/entries">{t('cancel')}</Link>
+                  {t('cancel')}
                 </Button>
                 <Button type="submit" className="w-full md:w-[200px]">
                   {t('save')}

@@ -16,8 +16,6 @@ export async function getJournals(
   const client = await mongoClient;
   const dbName = getDbName(email);
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   let query = {};
   if (term) {
     query = { name: { $regex: term, $options: 'i' } };

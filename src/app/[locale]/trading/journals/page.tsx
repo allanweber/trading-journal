@@ -1,8 +1,7 @@
-import Loading from '@/components/Loading';
+import { JournalsTableSkeleton } from '@/components/Skeletons';
 import JournalHeader from '@/components/journals/JournalHeader';
 import JournalSearch from '@/components/journals/JournalSearch';
 import JournalTable from '@/components/journals/JournalTable';
-import { getJournals } from '@/lib/journals';
 import { Suspense } from 'react';
 
 export default async function Journals({
@@ -15,19 +14,13 @@ export default async function Journals({
     page?: string;
   };
 }) {
-  const { data: journals, ...pagination } = await getJournals(
-    searchParams?.query,
-    searchParams?.currency?.split(','),
-    searchParams?.pageSize ? parseInt(searchParams?.pageSize, 10) : undefined,
-    searchParams?.page ? parseInt(searchParams?.page, 10) : undefined
-  );
-
+  const params = new URLSearchParams(searchParams);
   return (
     <>
       <JournalHeader />
       <JournalSearch />
-      <Suspense fallback={<Loading />}>
-        <JournalTable journals={journals} pagination={pagination} />
+      <Suspense key={params.toString()} fallback={<JournalsTableSkeleton />}>
+        <JournalTable searchParams={searchParams} />
       </Suspense>
     </>
   );

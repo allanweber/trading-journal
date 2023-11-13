@@ -13,7 +13,6 @@ import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { trpc } from '@/app/_trpc/client';
@@ -161,8 +160,13 @@ export default function JournalForm({ journalId }: { journalId?: string }) {
           />
 
           <div className="justify-between space-x-2">
-            <Button asChild variant="outline" className="w-[200px]">
-              <Link href="/trading/journals">{t('cancel')}</Link>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-[200px]"
+              onClick={() => router.back()}
+            >
+              {t('cancel')}
             </Button>
             <Button type="submit" className="w-[200px]">
               {t('save')}

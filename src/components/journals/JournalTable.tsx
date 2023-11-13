@@ -10,20 +10,59 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Journal } from '@/model/journal';
-import { PaginatedParams } from '@/model/pagination';
+import { getJournals } from '@/lib/journals';
 import { EditIcon, TrashIcon } from 'lucide-react';
+import { Separator } from '../ui/separator';
 
-export default function JournalTable({
-  journals,
-  pagination,
+export default async function JournalTable({
+  searchParams,
 }: {
-  journals: Journal[];
-  pagination: PaginatedParams;
+  searchParams?: {
+    query?: string;
+    currency?: string;
+    pageSize?: string;
+    page?: string;
+  };
 }) {
+  const { data: journals, ...pagination } = await getJournals(
+    searchParams?.query,
+    searchParams?.currency?.split(','),
+    searchParams?.pageSize ? parseInt(searchParams?.pageSize, 10) : undefined,
+    searchParams?.page ? parseInt(searchParams?.page, 10) : undefined
+  );
+
   return (
     <>
-      <div className="rounded-md border">
+      <div className="md:hidden rounded-md border min-w-full">
+        {journals?.map((journal) => (
+          <>
+            <div key={journal._id} className="mb-2 w-full rounded-md p-4">
+              <div className="flex items-center justify-between">
+                <p className="text-xl font-medium">{journal.name}</p>
+              </div>
+              <div className="flex w-full items-center justify-between pt-4">
+                <div>
+                  <p>
+                    <DateDisplay value={journal.startDate} />
+                  </p>
+                  <NumberDisplay
+                    value={journal.startBalance}
+                    currency={journal.currency}
+                  />
+                </div>
+                <div className="flex justify-end gap-2">
+                  <DataTableLink href={`/trading/journals/${journal._id}`}>
+                    <EditIcon className="h-4 w-4" />
+                  </DataTableLink>
+                  <TrashIcon className="h-4 w-4" />
+                </div>
+              </div>
+            </div>
+            <Separator />
+          </>
+        ))}
+      </div>
+      <div className="hidden rounded-md border min-w-full md:table">
         <Table>
           <TableHeader>
             <TableRow>

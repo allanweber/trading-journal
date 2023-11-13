@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { PropsWithChildren } from 'react';
 import { Button } from './ui/button';
