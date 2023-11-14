@@ -40,8 +40,8 @@ export function JournalsTableSkeleton() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Array.from({ length: 5 }).map(() => (
-              <TableRow>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <TableRow key={index}>
                 <TableCell>
                   <Skeleton className="h-4 w-full" />
                 </TableCell>

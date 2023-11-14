@@ -97,13 +97,9 @@ export default async function JournalTable({
                       <DataTableLink href={`/trading/journals/${journal._id}`}>
                         <EditIcon className="h-4 w-4" />
                       </DataTableLink>
-                      <TrashIcon className="h-4 w-4" />
-                      {/* <ActionConfirmation
-                        actionTitle="Delete"
-                        onConfirm={() => console.log('delete')}
-                      >
+                      <DataTableLink href={`/trading/journals/${journal._id}`}>
                         <TrashIcon className="h-4 w-4" />
-                      </ActionConfirmation> */}
+                      </DataTableLink>
                     </div>
                   </TableCell>
                 </TableRow>

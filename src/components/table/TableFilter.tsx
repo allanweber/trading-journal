@@ -53,7 +53,6 @@ export function TableFilter(props: FilterOptions) {
   }, [searchParams, filterId]);
 
   const selectChanges = () => {
-    console.log('selectChanges', selectedValues);
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');
     if (selectedValues.size > 0) {
