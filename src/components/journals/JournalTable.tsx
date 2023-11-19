@@ -1,6 +1,5 @@
 import DateDisplay from '@/components/DateDisplay';
 import NumberDisplay from '@/components/NumberDisplay';
-import DataTableLink from '@/components/datatable/DataTableLink';
 import { TablePagination } from '@/components/table/TablePagination';
 import {
   Table,
@@ -12,6 +11,7 @@ import {
 } from '@/components/ui/table';
 import { getJournals } from '@/lib/journals';
 import { EditIcon, TrashIcon } from 'lucide-react';
+import Link from 'next/link';
 import { Separator } from '../ui/separator';
 
 export default async function JournalTable({
@@ -51,9 +51,12 @@ export default async function JournalTable({
                   />
                 </div>
                 <div className="flex justify-end gap-2">
-                  <DataTableLink href={`/trading/journals/${journal._id}`}>
+                  <Link
+                    href={`/trading/journals/${journal._id}`}
+                    prefetch={false}
+                  >
                     <EditIcon className="h-4 w-4" />
-                  </DataTableLink>
+                  </Link>
                   <TrashIcon className="h-4 w-4" />
                 </div>
               </div>
@@ -78,9 +81,12 @@ export default async function JournalTable({
               journals.map((journal) => (
                 <TableRow key={journal._id}>
                   <TableCell className="font-medium">
-                    <DataTableLink href={`/trading/journals/${journal._id}`}>
+                    <Link
+                      href={`/trading/journals/${journal._id}`}
+                      prefetch={false}
+                    >
                       {journal.name}
-                    </DataTableLink>
+                    </Link>
                   </TableCell>
                   <TableCell>
                     <DateDisplay value={journal.startDate} />
@@ -94,12 +100,18 @@ export default async function JournalTable({
                   <TableCell>{journal.currency}</TableCell>
                   <TableCell className="text-right">
                     <div className="max-w-[45px] flex justify-between">
-                      <DataTableLink href={`/trading/journals/${journal._id}`}>
+                      <Link
+                        href={`/trading/journals/${journal._id}`}
+                        prefetch={false}
+                      >
                         <EditIcon className="h-4 w-4" />
-                      </DataTableLink>
-                      <DataTableLink href={`/trading/journals/${journal._id}`}>
+                      </Link>
+                      <Link
+                        href={`/trading/journals/${journal._id}`}
+                        prefetch={false}
+                      >
                         <TrashIcon className="h-4 w-4" />
-                      </DataTableLink>
+                      </Link>
                     </div>
                   </TableCell>
                 </TableRow>

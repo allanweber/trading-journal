@@ -16,6 +16,7 @@ export async function getJournals(
   pageSize: number = 10,
   pageNumber: number = 1
 ): Promise<Paginated<Journal>> {
+  noStore();
   const email = await userEmail();
   const client = await mongoClient;
   const dbName = getDbName(email);
@@ -24,7 +25,6 @@ export async function getJournals(
   if (term) {
     query = { name: { $regex: term, $options: 'i' } };
   }
-
   if (currencies && currencies.length > 0) {
     query = { ...query, currency: { $in: currencies } };
   }
@@ -62,6 +62,7 @@ export async function getJournals(
 }
 
 export async function getJournal(id: string): Promise<Journal> {
+  noStore();
   const email = await userEmail();
   const client = await mongoClient;
   const dbName = getDbName(email);
@@ -75,7 +76,7 @@ export async function getJournal(id: string): Promise<Journal> {
     throw Error(`Journal ${id} not found`);
   }
 
-  return journal;
+  return { ...journal, _id: journal._id!.toString() };
 }
 
 export async function saveJournal(journal: Journal) {

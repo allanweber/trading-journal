@@ -20,6 +20,8 @@ import { NumberInput } from '@/components/NumberInput';
 import FormDescriptionOrMessage from '@/components/ui/FormDescriptionOrMessage';
 import { saveJournal } from '@/lib/journals';
 import { Journal, journalSchema } from '@/model/journal';
+import { unstable_noStore as noStore } from 'next/cache';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -47,6 +49,7 @@ export default function JournalForm({ journal }: { journal?: Journal }) {
   });
 
   async function onSubmit(data: Journal) {
+    noStore();
     await saveJournal(data);
     toast({
       title: t('success-title'),
@@ -143,13 +146,8 @@ export default function JournalForm({ journal }: { journal?: Journal }) {
         />
 
         <div className="justify-between space-x-2">
-          <Button
-            type="button"
-            variant="outline"
-            className="w-[200px]"
-            onClick={() => router.back()}
-          >
-            {t('cancel')}
+          <Button asChild variant="outline" className="w-[200px]">
+            <Link href="/trading/journals">Cancel</Link>
           </Button>
           <Button type="submit" className="w-[200px]">
             {t('save')}
