@@ -66,7 +66,7 @@ export function TablePagination(props: PaginatedParams) {
   };
 
   const cantNextPage = () => {
-    return page === totalPages;
+    return total === 0 || page === totalPages;
   };
 
   const t = useTranslations('pagination');

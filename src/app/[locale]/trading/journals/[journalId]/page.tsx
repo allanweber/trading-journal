@@ -24,14 +24,8 @@ export default async function Page({
   const journal = await getJournal(params.journalId);
   return (
     <>
-      {journal ? (
-        <>
-          <JournalHeader journal={journal} />
-          <JournalForm journal={journal} />
-        </>
-      ) : (
-        <div>Loading</div>
-      )}
+      <JournalHeader journal={journal} />
+      <JournalForm journal={journal} />
     </>
   );
 }
