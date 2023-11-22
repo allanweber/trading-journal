@@ -3,16 +3,33 @@ import {
   getJournal,
   getJournals,
   saveJournal,
-} from '@/data/journals';
+} from '@/lib/journals';
 import { journalSchema } from '@/model/journal';
 import { z } from 'zod';
 import { privateProcedure, router } from '../trpc';
 
 export const journalRouter = router({
-  list: privateProcedure.query(async ({ ctx }) => {
-    const { userEmail } = ctx;
-    return await getJournals(userEmail);
-  }),
+  list: privateProcedure
+    .input(
+      z
+        .object({
+          term: z.string().optional(),
+          currencies: z.string().array().optional(),
+          pageSize: z.number().optional(),
+          pageNumber: z.number().optional(),
+        })
+        .optional()
+    )
+    .query(async ({ ctx, input }) => {
+      const { userEmail } = ctx;
+      return await getJournals(
+        userEmail,
+        input?.term,
+        input?.currencies,
+        input?.pageSize,
+        input?.pageNumber
+      );
+    }),
   single: privateProcedure.input(z.string()).query(async ({ ctx, input }) => {
     const { userEmail } = ctx;
     return await getJournal(userEmail, input);

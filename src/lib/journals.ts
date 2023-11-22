@@ -3,23 +3,23 @@
 import mongoClient from '@/lib/mongodb';
 import { getDbName } from '@/lib/utils';
 import { Journal } from '@/model/journal';
-import { Paginated } from '@/model/pagination';
+import { Paginated, Pagination } from '@/model/pagination';
+import { TRPCClientError } from '@trpc/client';
 import { ObjectId } from 'mongodb';
 import { unstable_noStore as noStore } from 'next/cache';
-import { userEmail } from './auth';
 
 const COLLECTION = 'journals';
 
 export async function getJournals(
+  userEmail: string,
   term?: string,
   currencies?: string[],
   pageSize: number = 10,
   pageNumber: number = 1
 ): Promise<Paginated<Journal>> {
   noStore();
-  const email = await userEmail();
   const client = await mongoClient;
-  const dbName = getDbName(email);
+  const dbName = getDbName(userEmail);
 
   let query = {};
   if (term) {
@@ -58,32 +58,33 @@ export async function getJournals(
     ])
     .toArray();
 
-  return new Paginated(journals, pageSize, pageNumber, total);
+  return new Paginated(journals, new Pagination(pageSize, pageNumber, total));
 }
 
-export async function getJournal(id: string): Promise<Journal> {
+export async function getJournal(
+  userEmail: string,
+  journalId: string
+): Promise<Journal> {
   noStore();
-  const email = await userEmail();
   const client = await mongoClient;
-  const dbName = getDbName(email);
+  const dbName = getDbName(userEmail);
 
   const journal = await client
     .db(dbName)
     .collection(COLLECTION)
-    .findOne<Journal>({ _id: new ObjectId(id) });
+    .findOne<Journal>({ _id: new ObjectId(journalId) });
 
   if (!journal) {
-    throw Error(`Journal ${id} not found`);
+    throw new TRPCClientError(`Journal ${journalId} not found`);
   }
 
   return { ...journal, _id: journal._id!.toString() };
 }
 
-export async function saveJournal(journal: Journal) {
+export async function saveJournal(userEmail: string, journal: Journal) {
   noStore();
-  const email = await userEmail();
   const client = await mongoClient;
-  const dbName = getDbName(email);
+  const dbName = getDbName(userEmail);
 
   const { _id, ...record } = journal;
   const result = await client
@@ -98,14 +99,16 @@ export async function saveJournal(journal: Journal) {
   return result;
 }
 
-export async function deleteJournal(id: string): Promise<void> {
+export async function deleteJournal(
+  userEmail: string,
+  journalId: string
+): Promise<void> {
   noStore();
-  const email = await userEmail();
   const client = await mongoClient;
-  const dbName = getDbName(email);
+  const dbName = getDbName(userEmail);
 
   await client
     .db(dbName)
     .collection(COLLECTION)
-    .deleteOne({ _id: new ObjectId(id) });
+    .deleteOne({ _id: new ObjectId(journalId) });
 }

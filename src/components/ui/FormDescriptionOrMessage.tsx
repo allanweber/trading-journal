@@ -5,7 +5,7 @@ import { FormDescription } from './form';
 type Props = {
   form: UseFormReturn<any, any, undefined>;
   fieldName: string;
-  descriptionKey: string;
+  descriptionKey?: string;
   translations: (id: string, values?: Record<string, string>) => string;
 };
 
@@ -15,6 +15,9 @@ export default function FormDescriptionOrMessage(props: Props) {
   const error = form.formState.errors?.[fieldName];
 
   if (!error || !error.message) {
+    if (!descriptionKey) {
+      return null;
+    }
     return <FormDescription>{translations(descriptionKey)}</FormDescription>;
   }
 

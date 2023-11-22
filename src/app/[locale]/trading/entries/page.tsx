@@ -15,11 +15,9 @@ function LoadingJournals() {
 function PageAction({
   loading,
   hasJournals,
-  addJournalTitle,
 }: {
   loading: boolean;
   hasJournals: boolean;
-  addJournalTitle: string;
 }) {
   if (loading) return null;
   if (hasJournals) return <AddEntryButton />;
@@ -28,7 +26,8 @@ function PageAction({
 
 export default function Entries() {
   const t = useTranslations('entries');
-  const { data: journals, isLoading, isSuccess } = trpc.journal.list.useQuery();
+  const { data, isLoading, isSuccess } = trpc.journal.list.useQuery();
+  console.log(data);
   return (
     <>
       <PageHeader>
@@ -39,15 +38,14 @@ export default function Entries() {
         <Action>
           <PageAction
             loading={isLoading}
-            hasJournals={isSuccess && journals.length > 0}
-            addJournalTitle={t('add-journal')}
+            hasJournals={isSuccess && data.total > 0}
           />
         </Action>
       </PageHeader>
       {isLoading ? (
         <LoadingJournals />
       ) : (
-        <EntryTable journals={journals ?? []} />
+        <EntryTable journals={data?.data ?? []} />
       )}
     </>
   );
